@@ -6,7 +6,6 @@ import ch.keepcalm.web.model.Customer;
 import ch.keepcalm.web.service.CustomerService;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,7 +29,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CustomerController.class)
-@AutoConfigureRestDocs("target/generated-snippets")
+@AutoConfigureRestDocs(
+        outputDir = "target/generated-snippets",
+        uriHost = "12monkeys-as-a-service.io",
+        uriPort = 80
+)
 public class CustomerControllerDocumentation {
 
 
@@ -40,36 +42,13 @@ public class CustomerControllerDocumentation {
 
     @MockBean
     private CustomerService service;
-
+    @Autowired
     private ObjectMapper objectMapper;
 
-    private RestDocumentationResultHandler document;
 
-    @Before
-    public void setUp() {
-        objectMapper = new ObjectMapper();
-    }
 
     @Test
     public void postCustomer() throws Exception {
-       /* Application applicationRequest = new Application();
-        applicationRequest.setType(Type.COMPANY_WITH_EMPLOYEES);
-
-        Application applicationResponse = new Application();
-        applicationResponse.setStatus(Status.NEW);
-        applicationResponse.setType(Type.COMPANY_WITH_EMPLOYEES);
-        applicationResponse.setSessionId(SESSION_ID);
-
-        ApplicationResource applicationResourceRequest = new ApplicationResource();
-        applicationResourceRequest.setType(Type.COMPANY_WITH_EMPLOYEES);
-
-        given(this.service.createApplication(applicationRequest)).willReturn(applicationResponse);
-        String applicationJson = objectMapper.writeValueAsString(applicationResourceRequest);
-        mvc.perform(post("/api/application").contentType(MediaTypes.HAL_JSON).content(applicationJson))
-                .andExpect(status().isCreated()).andDo(document("{method-name}", links(
-                linkWithRel("self").description(ApplicationController.DESCRIPTION),
-                linkWithRel("api").description(ApiController.DESCRIPTION))));*/
-
         Address address = Address.newAddress()
                 .locality("Gockhausen")
                 .municipality("Dübendorf")

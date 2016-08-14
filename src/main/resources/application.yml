@@ -1,0 +1,51 @@
+# Spring
+spring:
+  profiles:
+    active: dev
+  application:
+    name: 12monkeys-service
+  # I18N (MessageSourceAutoConfiguration)
+  messages:
+    basename: i18n/messages
+    cache-seconds: -1
+    encoding: UTF-8
+
+
+
+# Infos Build
+info.build:
+  artifact: @project.artifactId@
+  name: @project.name@
+  description: @project.description@
+  version: @project.version@
+
+
+# Management
+management:
+  address: ${server.address}
+  port: ${server.port}
+  context-path: /manage
+
+# Endpoints
+endpoints.health:
+  enabled: true
+  sensitive: false
+
+
+# Logging
+logging:
+  level.: warn
+  level.org.springframework.boot: info
+  level.org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: info
+
+
+# Server
+server:
+  address: localhost
+  port: 8080
+
+# Tomcat
+  tomcat:
+    max-http-header-size: 16380
+    compression: on
+    compressableMimeTypes: application/json,application/xml,text/html,text/xml,text/plain

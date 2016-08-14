@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerService service;
     @Autowired
-    CustomerResourceAssembler customerResourceAssembler;
+    private CustomerResourceAssembler resourceAssembler;
     @Autowired
     public void setCustomerController(CustomerService customerService, CustomerResourceAssembler customerResourceAssembler) {
-        this.customerService = customerService;
-        this.customerResourceAssembler = customerResourceAssembler;
+        this.service = customerService;
+        this.resourceAssembler = customerResourceAssembler;
     }
 
 
@@ -34,7 +34,7 @@ public class CustomerController {
     public CustomerResource postCustomer(@RequestBody CustomerResource customerResource) {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerResource, customer);
-        return customerResourceAssembler.toResource(customerService.createCustomer(customer));
+        return resourceAssembler.toResource(service.createCustomer(customer));
 
     }
 
