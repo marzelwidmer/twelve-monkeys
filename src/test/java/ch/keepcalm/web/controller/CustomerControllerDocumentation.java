@@ -4,7 +4,7 @@ package ch.keepcalm.web.controller;
 import ch.keepcalm.web.model.Address;
 import ch.keepcalm.web.model.Customer;
 import ch.keepcalm.web.service.CustomerService;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
