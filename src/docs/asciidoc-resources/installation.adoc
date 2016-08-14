@@ -1,0 +1,41 @@
+
+:spring-boot-ref-guide: http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/
+:spring-boot-ref-guide-executable-jar: http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-first-application-executable-jar
+
+
+=== Build Application:
+ $ mvn package
+
+Copy the file {project-artifact-name}.jar anywhere on the server.
+The JAR already contains the configuration for all available environments.
+For further information please visit the  {spring-boot-ref-guide}[Spring Boot Reference Guide]
+
+=== Start Application
+==== Default Profile
+Start application on command line. The _default_ profile supports a H2 datbase.
+For more information please visit the {spring-boot-ref-guide-executable-jar}[Spring Boot Reference Guide] for further information.
+
+    $ java -jar price-service.jar
+
+There are additional Spring profiles available.
+
+==== Profiles
+.Table -Dspring.profiles.active=
+
+.Profiles
+|===
+|Profile |Environment |Database
+
+|default
+|dev
+|H2
+|===
+
+
+==== SOAP Debug VM-Argument
+    -Dcom.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump=true
+    -Dcom.sun.xml.ws.transport.http.client.HttpTransportPipe.dump=true
+    -Dcom.sun.xml.ws.transport.local.LocalTransportPipe.dump=true
+    -Dcom.sun.xml.ws.transport.http.HttpAdapter.dump=true
+    -Dcom.sun.xml.internal.ws.transport.http.HttpAdapter.dumpTreshold=10000
+
