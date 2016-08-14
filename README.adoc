@@ -11,9 +11,7 @@ twelve-monkeys
 
 image:https://img.shields.io/travis/marzelwidmer/twelve-monkeys.svg?style=flat-square["TravisCI", link="https://travis-ci.org/marzelwidmer/twelve-monkeys"]
 image:https://circleci.com/gh/marzelwidmer/twelve-monkeys.svg?style=shield&circle-token=:circle-token["CircleCI", link="https://circleci.com/gh/marzelwidmer/twelve-monkeys"]
-image:https://api.codacy.com/project/badge/Grade/34093789c75a4b72891743de8715cc65["Codacy code quality", link="https://www.codacy.com/app/marzelwidmer/twelve-monkeys?utm_source=github.com&utm_medium=referral&utm_content=marzelwidmer/twelve-monkeys&utm_campaign=Badge_Grade"]
-image:https://badges.gitter.im/marzelwidmer/twelve-monkeys.svg[link="https://gitter.im/marzelwidmer/twelve-monkeys?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
-image:https://api.codacy.com/project/badge/Coverage/34093789c75a4b72891743de8715cc65["Codacy code quality", link="https://www.codacy.com/app/marzelwidmer/twelve-monkeys?utm_source=github.com&utm_medium=referral&utm_content=marzelwidmer/twelve-monkeys&utm_campaign=Badge_Coverage"]
+image:https://api.codacy.com/project/badge/Grade/f1b86eee772c4c7aaf65d2b896585365["Codacy code quality", link="https://www.codacy.com/app/marzelwidmer/twelve-monkeys?utm_source=github.com&utm_medium=referral&utm_content=marzelwidmer/twelve-monkeys&utm_campaign=Badge_Grade"]
 image:https://coveralls.io/repos/github/marzelwidmer/twelve-monkeys/badge.svg?branch=develop["Coverage Status", link="https://coveralls.io/github/marzelwidmer/twelve-monkeys?branch=develop"]
 
 
