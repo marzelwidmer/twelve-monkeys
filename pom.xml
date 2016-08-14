@@ -129,10 +129,10 @@
 			<!--<scope>runtime</scope> used for H2 database console @see WebConfiguration-->
 		</dependency>
 		<!-- flayway -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-		</dependency>
+		</dependency>-->
 		<!-- jGitFlow -->
 		<dependency>
 			<groupId>external.atlassian.jgitflow</groupId>

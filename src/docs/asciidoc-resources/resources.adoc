@@ -1,118 +1,17 @@
-
-
-[[resources-index]]
-==  Index
-The index provides the entry point into the service.
-
-=== Accessing the index
-A `GET` request is used to access the index
-
-==== Example request curl
-include::{snippets}/index/curl-request.adoc[]
-
-==== Example request HTTP
-include::{snippets}/index/http-request.adoc[]
-
-==== Example response
-include::{snippets}/index/http-response.adoc[]
-
-==== Links
-include::{snippets}/index/links.adoc[]
-
-
-
-
 [[resources-customers]]
 == Customers
-The Customer resource is used to create, modify and list customer.
+The customers is {project-name}'s root resource.
 
+=== POST
 
-[[resource-customer-create]]
-=== Creating customer
-A `POST` request creates a new customer.
-
-==== Request structure
-include::{snippets}/create-customer/request-fields.adoc[]
-
-==== Example request curl
-include::{snippets}/create-customer/curl-request.adoc[]
-
-==== Example request HTTP
-include::{snippets}/create-customer/http-request.adoc[]
+==== Example requests
+include::{snippets}/post-customers/curl-request.adoc[]
+include::{snippets}/post-customers/http-request.adoc[]
+include::{snippets}/post-customers/httpie-request.adoc[]
 
 ==== Example response
-include::{snippets}/create-customer/http-response.adoc[]
+include::{snippets}/post-customers/http-response.adoc[]
 
 ==== Links
-include::{snippets}/create-customer/links.adoc[]
-
-
-
-[[resource-customer]]
-=== Accessing a customer
-A `GET` request is used to access the customer
-
-==== Example request curl
-include::{snippets}/get-customer/curl-request.adoc[]
-
-==== Example request HTTP
-include::{snippets}/get-customer/http-request.adoc[]
-
-==== Example response
-include::{snippets}/get-customer/http-response.adoc[]
-
-==== Links
-include::{snippets}/get-customer/links.adoc[]
-
-
-
-[[resource-customer-list]]
-=== Listing customers
-A `GET` request lists all of the service's customers.
-
-==== Example request curl
-include::{snippets}/list-customers/curl-request.adoc[]
-
-==== Example request HTTP
-include::{snippets}/list-customers/http-request.adoc[]
-
-==== Example response
-include::{snippets}/list-customers/http-response.adoc[]
-
-==== Links
-include::{snippets}/list-customers/links.adoc[]
-
-
-
-[[resource-product-create]]
-=== Creating product
-A `POST` request creates a new product to a customer.
-
-==== Request structure
-include::{snippets}/create-product/request-fields.adoc[]
-
-==== Example request curl
-include::{snippets}/create-product/curl-request.adoc[]
-
-==== Example request HTTP
-include::{snippets}/create-product/http-request.adoc[]
-
-==== Example response
-include::{snippets}/create-product/http-response.adoc[]
-
-
-
-[[resource-product-list]]
-=== Update Product Price
-A `PATCH` request upadte the product with a price.
-
-==== Example request curl
-include::{snippets}/update-product-price/curl-request.adoc[]
-
-==== Example request HTTP
-include::{snippets}/update-product-price/http-request.adoc[]
-
-==== Example response
-include::{snippets}/update-product-price/http-response.adoc[]
-
+include::{snippets}/post-customers/links.adoc[]
 
