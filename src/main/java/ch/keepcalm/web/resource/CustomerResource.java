@@ -8,22 +8,16 @@ import java.util.Date;
 
 public class CustomerResource extends ResourceSupport {
 
-    @JsonProperty(value="address")
-    private AddressResource address;
+
     private String gender;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+    @JsonProperty(value="address")
+    private AddressResource address;
 
     public CustomerResource() {
     }
 
-    public AddressResource getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressResource address) {
-        this.address = address;
-    }
 
     public String getGender() {
         return gender;
@@ -40,16 +34,20 @@ public class CustomerResource extends ResourceSupport {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    public AddressResource getAddress() {
+        return address;
+    }
 
+    public void setAddress(AddressResource address) {
+        this.address = address;
+    }
 
     @Override
     public String toString() {
         return "CustomerResource{" +
-                "address=" + address +
-                ", gender='" + gender + '\'' +
+                "gender='" + gender + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
+                ", address=" + address +
                 '}';
     }
-
-
 }

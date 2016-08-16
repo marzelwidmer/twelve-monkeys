@@ -20,22 +20,32 @@ public class CustomerResourceAssembler extends ResourceAssemblerSupport<Customer
 
     @Override
     public CustomerResource toResource(Customer customer) {
+
         // api/customers/1; rel="self
         CustomerResource customerResource = createResourceWithId(customer.getId(), customer);
 
         Mapper mapper = new DozerBeanMapper();
         customerResource = mapper.map(customer, CustomerResource.class);
 
+        Link self = new Link(linkTo(CustomerController.class)
+                .slash(customer.getId())
+                .toUriComponentsBuilder().build().toUriString(), "self");
+        customerResource.add(self);
+
+
         // GET products http://localhost:8080/api/customers/1/products; rel="list_products"
         Link listProducts = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())
-                .slash("products").toUriComponentsBuilder().build().toUriString(), "list_product_package");
+                .slash("product_package").toUriComponentsBuilder().build().toUriString(), "list_package");
         customerResource.add(listProducts);
+
         // POST products http://localhost:8080/api/customers/1/products; rel="create_product"
         Link createProducts = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())
-                .slash("products").toUriComponentsBuilder().build().toUriString(), "create_product_package");
+                .slash("product_package").toUriComponentsBuilder().build().toUriString(), "create_package");
         customerResource.add(createProducts);
+
+
         // POST products http://localhost:8080/api/customers/1/deeplink; rel="create_deeplink"
         Link deeplink = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())
@@ -44,36 +54,5 @@ public class CustomerResourceAssembler extends ResourceAssemblerSupport<Customer
 
         return customerResource;
     }
-   /*@Override
-    public CustomerResource toResource(Customer customer) {
 
-        Mapper mapper = new DozerBeanMapper();
-        CustomerResource destObject =
-                mapper.map(customer, CustomerResource.class);
-
-        // api/customers/1; rel="self
-        CustomerResource customerResource = createResourceWithId(customer.getId(), customer);
-        //CustomerResource customerResource = instantiateResource(customer);
-        // GET products http://localhost:8080/api/customers/1/products; rel="list_products"
-        Link listProducts = new Link(linkTo(CustomerController.class)
-                .slash(customer.getId())
-                .slash("products").toUriComponentsBuilder().build().toUriString(), "list_product_package");
-        customerResource.add(listProducts);
-        // POST products http://localhost:8080/api/customers/1/products; rel="create_product"
-        Link createProducts = new Link(linkTo(CustomerController.class)
-                .slash(customer.getId())
-                .slash("products").toUriComponentsBuilder().build().toUriString(), "create_product_package");
-        customerResource.add(createProducts);
-        // POST products http://localhost:8080/api/customers/1/deeplink; rel="create_deeplink"
-        Link deeplink = new Link(linkTo(CustomerController.class)
-                .slash(customer.getId())
-                .slash("deeplink").toUriComponentsBuilder().build().toUriString(), "create_deeplink");
-        customerResource.add(deeplink);
-
-        customerResource.setCustomerResource(destObject);
-
-
-
-        return customerResource;
-    }*/
 }
