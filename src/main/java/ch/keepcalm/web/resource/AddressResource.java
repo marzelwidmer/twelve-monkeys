@@ -2,25 +2,26 @@ package ch.keepcalm.web.resource;
 
 import org.springframework.hateoas.ResourceSupport;
 
-/**
- * Created by marcelwidmer on 14/08/16.
- */
-public class AddressResource extends ResourceSupport {
+public class AddressResource  extends ResourceSupport {
+    private String municipalityNr;
+    private String postalCode;
+    private String postalCodeAddition;
+    private String municipality;
+    private String locality;
 
-
-    private String municipality;  // ": "Dübendorf", /* Gemeindename */
-    private String municipalityNr;  //": 191, /* Gemeinde-Nr */
-    private String postalCode; // ": 8044, /* Postleitzahl */
-    private String postalCodeAddition; // ": 00, /* postleitzahlZusatz */
-    private String locality; //": "Gockhausen" /* Ort */
-
-
-    public String getMunicipality() {
-        return municipality;
+    public AddressResource() {
     }
 
-    public void setMunicipality(String municipality) {
-        this.municipality = municipality;
+    private AddressResource(Builder builder) {
+        setMunicipalityNr(builder.municipalityNr);
+        setPostalCode(builder.postalCode);
+        setPostalCodeAddition(builder.postalCodeAddition);
+        setMunicipality(builder.municipality);
+        setLocality(builder.locality);
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     public String getMunicipalityNr() {
@@ -47,6 +48,14 @@ public class AddressResource extends ResourceSupport {
         this.postalCodeAddition = postalCodeAddition;
     }
 
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
+    }
+
     public String getLocality() {
         return locality;
     }
@@ -55,13 +64,92 @@ public class AddressResource extends ResourceSupport {
         this.locality = locality;
     }
 
+
+    /**
+     * {@code AddressResource} builder static inner class.
+     */
+    public static final class Builder {
+        private String municipalityNr;
+        private String postalCode;
+        private String postalCodeAddition;
+        private String municipality;
+        private String locality;
+
+        private Builder() {
+        }
+
+        /**
+         * Sets the {@code municipalityNr} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param val the {@code municipalityNr} to set
+         * @return a reference to this Builder
+         */
+        public Builder municipalityNr(String val) {
+            municipalityNr = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code postalCode} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param val the {@code postalCode} to set
+         * @return a reference to this Builder
+         */
+        public Builder postalCode(String val) {
+            postalCode = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code postalCodeAddition} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param val the {@code postalCodeAddition} to set
+         * @return a reference to this Builder
+         */
+        public Builder postalCodeAddition(String val) {
+            postalCodeAddition = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code municipality} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param val the {@code municipality} to set
+         * @return a reference to this Builder
+         */
+        public Builder municipality(String val) {
+            municipality = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code locality} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param val the {@code locality} to set
+         * @return a reference to this Builder
+         */
+        public Builder locality(String val) {
+            locality = val;
+            return this;
+        }
+
+        /**
+         * Returns a {@code AddressResource} built from the parameters previously set.
+         *
+         * @return a {@code AddressResource} built with parameters of this {@code AddressResource.Builder}
+         */
+        public AddressResource build() {
+            return new AddressResource(this);
+        }
+    }
+
     @Override
     public String toString() {
         return "AddressResource{" +
-                "municipality='" + municipality + '\'' +
-                ", municipalityNr='" + municipalityNr + '\'' +
+                "municipalityNr='" + municipalityNr + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", postalCodeAddition='" + postalCodeAddition + '\'' +
+                ", municipality='" + municipality + '\'' +
                 ", locality='" + locality + '\'' +
                 '}';
     }

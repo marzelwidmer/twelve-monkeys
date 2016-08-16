@@ -6,6 +6,7 @@ import ch.keepcalm.web.model.Customer;
 import ch.keepcalm.web.service.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.DateTime;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,12 @@ public class CustomerControllerDocumentation {
 
     @MockBean
     private CustomerService service;
-    @Autowired
     private ObjectMapper objectMapper;
+    @Before
+    public void setUp() {
+        objectMapper = new ObjectMapper();
+    }
+
 
 
 

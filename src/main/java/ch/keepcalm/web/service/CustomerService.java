@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
 
-    @Autowired
+
     private CustomerRepository repository;
     @Autowired
     public void setCustomerService(CustomerRepository repository) {
@@ -21,4 +21,7 @@ public class CustomerService {
     }
 
 
+    public Customer getCustomer(int id) {
+        return repository.findOne(id);
+    }
 }
