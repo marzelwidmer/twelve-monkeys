@@ -4,7 +4,7 @@ import ch.keepcalm.web.controller.assembler.CustomerResourceAssembler;
 import ch.keepcalm.web.model.Customer;
 import ch.keepcalm.web.model.Product;
 import ch.keepcalm.web.resource.CustomerResource;
-import ch.keepcalm.web.resource.ProductPackageResource;
+import ch.keepcalm.web.resource.CustomerProductPackageResource;
 import ch.keepcalm.web.resource.ProductResource;
 import ch.keepcalm.web.service.CustomerService;
 import org.dozer.DozerBeanMapper;
@@ -50,7 +50,7 @@ public class CustomerController {
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "{id}/product_package")
-    public ProductResource postProductPackage(@RequestBody ProductPackageResource productResource) {
+    public ProductResource postProductPackage(@RequestBody CustomerProductPackageResource productResource) {
 
         Mapper mapper = new DozerBeanMapper();
         for (ProductResource resource : productResource.getProducts()) {
