@@ -1,3 +1,4 @@
+/*
 package ch.keepcalm.web.controller;
 
 
@@ -92,3 +93,4 @@ public class CustomerControllerDocumentation {
 
 
 }
+*/

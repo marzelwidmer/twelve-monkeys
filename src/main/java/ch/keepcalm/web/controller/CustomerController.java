@@ -4,7 +4,8 @@ import ch.keepcalm.web.controller.assembler.CustomerResourceAssembler;
 import ch.keepcalm.web.model.Customer;
 import ch.keepcalm.web.resource.CustomerResource;
 import ch.keepcalm.web.service.CustomerService;
-import org.springframework.beans.BeanUtils;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class CustomerController {
     private CustomerService service;
     @Autowired
     private CustomerResourceAssembler resourceAssembler;
+
     @Autowired
     public void setCustomerController(CustomerService customerService, CustomerResourceAssembler customerResourceAssembler) {
         this.service = customerService;
@@ -34,9 +36,12 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CustomerResource postCustomer(@RequestBody CustomerResource customerResource) {
-        Customer customer = new Customer();
-        BeanUtils.copyProperties(customerResource, customer);
-        return resourceAssembler.toResource(service.createCustomer(customer));
+
+        Mapper mapper = new DozerBeanMapper();
+        Customer destObject = mapper.map(customerResource, Customer.class);
+
+        Customer result = service.createCustomer(destObject);
+        return resourceAssembler.toResource(result);
 
     }
 

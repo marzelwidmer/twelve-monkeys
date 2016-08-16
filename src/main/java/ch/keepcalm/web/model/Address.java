@@ -58,14 +58,6 @@ public class Address  implements Serializable {
      */
     public Address() {}
 
-    private Address(Builder builder) {
-        this.municipality = builder.municipality;
-        this.municipalityNr = builder.municipality_nr;
-        this.postalCode = builder.postal_code;
-        this.postalCodeAddition = builder.postalCodeAddition;
-        this.locality = builder.locality;
-    }
-
     public int getId() {
         return id;
     }
@@ -114,48 +106,33 @@ public class Address  implements Serializable {
         this.locality = locality;
     }
 
-    public static Builder newAddress() {
-        return new Builder();
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
 
-    public static final class Builder {
-        private String municipality;
-        private String municipality_nr;
-        private String postal_code;
-        private String postalCodeAddition;
-        private String locality;
+    public Date getUpdatedOn() {
+        return updatedOn;
+    }
 
-        private Builder() {
-        }
+    public void setUpdatedOn(Date updatedOn) {
+        this.updatedOn = updatedOn;
+    }
 
-        public Address build() {
-            return new Address(this);
-        }
-
-        public Builder municipality(String municipality) {
-            this.municipality = municipality;
-            return this;
-        }
-
-        public Builder municipalityNr(String municipalityNr) {
-            this.municipality_nr = municipalityNr;
-            return this;
-        }
-
-        public Builder postalCode(String postalCode) {
-            this.postal_code = postalCode;
-            return this;
-        }
-
-        public Builder postalCodeAddition(String postalCodeAddition) {
-            this.postalCodeAddition = postalCodeAddition;
-            return this;
-        }
-
-        public Builder locality(String locality) {
-            this.locality = locality;
-            return this;
-        }
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", municipality='" + municipality + '\'' +
+                ", municipalityNr='" + municipalityNr + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", postalCodeAddition='" + postalCodeAddition + '\'' +
+                ", locality='" + locality + '\'' +
+                ", createdOn=" + createdOn +
+                ", updatedOn=" + updatedOn +
+                '}';
     }
 }

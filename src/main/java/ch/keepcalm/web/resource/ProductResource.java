@@ -6,13 +6,14 @@ import java.math.BigDecimal;
 
 public class ProductResource  extends ResourceSupport {
 
+    private boolean bestPrice = false;
     private BigDecimal price;
     private String unfall;
     private String franchise;
     private String drittesKind;
     private String description;
     private String produktId;
-    private DoctorResource arzt;
+    private String avmNetz;
     private String eintrittsalter;
     private String ergaenzungsmodul;
     private String instanz;
@@ -25,32 +26,34 @@ public class ProductResource  extends ResourceSupport {
     private String versicherterBetrag; // decimal
     private String versicherterBetragCode;
 
+
+
+    // start product package stuff
+    private BigDecimal bruttoPreis;
+    private BigDecimal nettoPreis;
+    private BigDecimal kvg106Betrag;
+    private BigDecimal umweltabgabeBetrag;
+    private Boolean drittesKindPraemie;
+    private BigDecimal einjahrgratisBetrag;
+    private BigDecimal familienrabattBetrag;
+    private BigDecimal kinderJugendrabattBetrag;
+    private BigDecimal kinderStartrabattBetrag;
+    private BigDecimal kollektivrabatt;
+    private BigDecimal kombinationsrabattBetrag;
+    private BigDecimal mehrjahresvertragBetrag;
+    private BigDecimal partnerrabattBetrag;
+    private BigDecimal ueberrabattierungBetrag;
+
+
     public ProductResource() {
     }
 
-    private ProductResource(Builder builder) {
-        setPrice(builder.price);
-        setUnfall(builder.unfall);
-        setFranchise(builder.franchise);
-        setDrittesKind(builder.drittesKind);
-        setDescription(builder.description);
-        setProduktId(builder.produktId);
-        setArzt(builder.arzt);
-        setEintrittsalter(builder.eintrittsalter);
-        setErgaenzungsmodul(builder.ergaenzungsmodul);
-        setInstanz(builder.instanz);
-        setInvaliditaetskapital(builder.invaliditaetskapital);
-        setLeistungsdauer(builder.leistungsdauer);
-        setMutterschaft(builder.mutterschaft);
-        setTodesfallkapital(builder.todesfallkapital);
-        setUnfallSistierung(builder.unfallSistierung);
-        setVariante(builder.variante);
-        setVersicherterBetrag(builder.versicherterBetrag);
-        setVersicherterBetragCode(builder.versicherterBetragCode);
+    public boolean isBestPrice() {
+        return bestPrice;
     }
 
-    public static Builder newBuilder() {
-        return new Builder();
+    public void setBestPrice(boolean bestPrice) {
+        this.bestPrice = bestPrice;
     }
 
     public BigDecimal getPrice() {
@@ -101,12 +104,12 @@ public class ProductResource  extends ResourceSupport {
         this.produktId = produktId;
     }
 
-    public DoctorResource getArzt() {
-        return arzt;
+    public String getAvmNetz() {
+        return avmNetz;
     }
 
-    public void setArzt(DoctorResource arzt) {
-        this.arzt = arzt;
+    public void setAvmNetz(String avmNetz) {
+        this.avmNetz = avmNetz;
     }
 
     public String getEintrittsalter() {
@@ -197,16 +200,129 @@ public class ProductResource  extends ResourceSupport {
         this.versicherterBetragCode = versicherterBetragCode;
     }
 
+    public BigDecimal getBruttoPreis() {
+        return bruttoPreis;
+    }
+
+    public void setBruttoPreis(BigDecimal bruttoPreis) {
+        this.bruttoPreis = bruttoPreis;
+    }
+
+    public BigDecimal getNettoPreis() {
+        return nettoPreis;
+    }
+
+    public void setNettoPreis(BigDecimal nettoPreis) {
+        this.nettoPreis = nettoPreis;
+    }
+
+    public BigDecimal getKvg106Betrag() {
+        return kvg106Betrag;
+    }
+
+    public void setKvg106Betrag(BigDecimal kvg106Betrag) {
+        this.kvg106Betrag = kvg106Betrag;
+    }
+
+    public BigDecimal getUmweltabgabeBetrag() {
+        return umweltabgabeBetrag;
+    }
+
+    public void setUmweltabgabeBetrag(BigDecimal umweltabgabeBetrag) {
+        this.umweltabgabeBetrag = umweltabgabeBetrag;
+    }
+
+    public Boolean getDrittesKindPraemie() {
+        return drittesKindPraemie;
+    }
+
+    public void setDrittesKindPraemie(Boolean drittesKindPraemie) {
+        this.drittesKindPraemie = drittesKindPraemie;
+    }
+
+    public BigDecimal getEinjahrgratisBetrag() {
+        return einjahrgratisBetrag;
+    }
+
+    public void setEinjahrgratisBetrag(BigDecimal einjahrgratisBetrag) {
+        this.einjahrgratisBetrag = einjahrgratisBetrag;
+    }
+
+    public BigDecimal getFamilienrabattBetrag() {
+        return familienrabattBetrag;
+    }
+
+    public void setFamilienrabattBetrag(BigDecimal familienrabattBetrag) {
+        this.familienrabattBetrag = familienrabattBetrag;
+    }
+
+    public BigDecimal getKinderJugendrabattBetrag() {
+        return kinderJugendrabattBetrag;
+    }
+
+    public void setKinderJugendrabattBetrag(BigDecimal kinderJugendrabattBetrag) {
+        this.kinderJugendrabattBetrag = kinderJugendrabattBetrag;
+    }
+
+    public BigDecimal getKinderStartrabattBetrag() {
+        return kinderStartrabattBetrag;
+    }
+
+    public void setKinderStartrabattBetrag(BigDecimal kinderStartrabattBetrag) {
+        this.kinderStartrabattBetrag = kinderStartrabattBetrag;
+    }
+
+    public BigDecimal getKollektivrabatt() {
+        return kollektivrabatt;
+    }
+
+    public void setKollektivrabatt(BigDecimal kollektivrabatt) {
+        this.kollektivrabatt = kollektivrabatt;
+    }
+
+    public BigDecimal getKombinationsrabattBetrag() {
+        return kombinationsrabattBetrag;
+    }
+
+    public void setKombinationsrabattBetrag(BigDecimal kombinationsrabattBetrag) {
+        this.kombinationsrabattBetrag = kombinationsrabattBetrag;
+    }
+
+    public BigDecimal getMehrjahresvertragBetrag() {
+        return mehrjahresvertragBetrag;
+    }
+
+    public void setMehrjahresvertragBetrag(BigDecimal mehrjahresvertragBetrag) {
+        this.mehrjahresvertragBetrag = mehrjahresvertragBetrag;
+    }
+
+    public BigDecimal getPartnerrabattBetrag() {
+        return partnerrabattBetrag;
+    }
+
+    public void setPartnerrabattBetrag(BigDecimal partnerrabattBetrag) {
+        this.partnerrabattBetrag = partnerrabattBetrag;
+    }
+
+    public BigDecimal getUeberrabattierungBetrag() {
+        return ueberrabattierungBetrag;
+    }
+
+    public void setUeberrabattierungBetrag(BigDecimal ueberrabattierungBetrag) {
+        this.ueberrabattierungBetrag = ueberrabattierungBetrag;
+    }
+
     @Override
     public String toString() {
         return "ProductResource{" +
-                "price=" + price +
+                "bestPrice=" + bestPrice +
+                ", price=" + price +
                 ", unfall='" + unfall + '\'' +
                 ", franchise='" + franchise + '\'' +
                 ", drittesKind='" + drittesKind + '\'' +
                 ", description='" + description + '\'' +
                 ", produktId='" + produktId + '\'' +
-                ", arzt=" + arzt +
+                ", avmNetz='" + avmNetz + '\'' +
                 ", eintrittsalter='" + eintrittsalter + '\'' +
                 ", ergaenzungsmodul='" + ergaenzungsmodul + '\'' +
                 ", instanz='" + instanz + '\'' +
@@ -218,240 +334,20 @@ public class ProductResource  extends ResourceSupport {
                 ", variante='" + variante + '\'' +
                 ", versicherterBetrag='" + versicherterBetrag + '\'' +
                 ", versicherterBetragCode='" + versicherterBetragCode + '\'' +
+                ", bruttoPreis=" + bruttoPreis +
+                ", nettoPreis=" + nettoPreis +
+                ", kvg106Betrag=" + kvg106Betrag +
+                ", umweltabgabeBetrag=" + umweltabgabeBetrag +
+                ", drittesKindPraemie=" + drittesKindPraemie +
+                ", einjahrgratisBetrag=" + einjahrgratisBetrag +
+                ", familienrabattBetrag=" + familienrabattBetrag +
+                ", kinderJugendrabattBetrag=" + kinderJugendrabattBetrag +
+                ", kinderStartrabattBetrag=" + kinderStartrabattBetrag +
+                ", kollektivrabatt=" + kollektivrabatt +
+                ", kombinationsrabattBetrag=" + kombinationsrabattBetrag +
+                ", mehrjahresvertragBetrag=" + mehrjahresvertragBetrag +
+                ", partnerrabattBetrag=" + partnerrabattBetrag +
+                ", ueberrabattierungBetrag=" + ueberrabattierungBetrag +
                 '}';
-    }
-
-    /**
-     * {@code ProductResource} builder static inner class.
-     */
-    public static final class Builder {
-        private BigDecimal price;
-        private String unfall;
-        private String franchise;
-        private String drittesKind;
-        private String description;
-        private String produktId;
-        private DoctorResource arzt;
-        private String eintrittsalter;
-        private String ergaenzungsmodul;
-        private String instanz;
-        private String invaliditaetskapital;
-        private String leistungsdauer;
-        private String mutterschaft;
-        private String todesfallkapital;
-        private String unfallSistierung;
-        private String variante;
-        private String versicherterBetrag;
-        private String versicherterBetragCode;
-
-        private Builder() {
-        }
-
-        /**
-         * Sets the {@code price} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code price} to set
-         * @return a reference to this Builder
-         */
-        public Builder price(BigDecimal val) {
-            price = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code unfall} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code unfall} to set
-         * @return a reference to this Builder
-         */
-        public Builder unfall(String val) {
-            unfall = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code franchise} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code franchise} to set
-         * @return a reference to this Builder
-         */
-        public Builder franchise(String val) {
-            franchise = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code drittesKind} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code drittesKind} to set
-         * @return a reference to this Builder
-         */
-        public Builder drittesKind(String val) {
-            drittesKind = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code description} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code description} to set
-         * @return a reference to this Builder
-         */
-        public Builder description(String val) {
-            description = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code produktId} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code produktId} to set
-         * @return a reference to this Builder
-         */
-        public Builder produktId(String val) {
-            produktId = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code arzt} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code arzt} to set
-         * @return a reference to this Builder
-         */
-        public Builder arzt(DoctorResource val) {
-            arzt = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code eintrittsalter} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code eintrittsalter} to set
-         * @return a reference to this Builder
-         */
-        public Builder eintrittsalter(String val) {
-            eintrittsalter = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code ergaenzungsmodul} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code ergaenzungsmodul} to set
-         * @return a reference to this Builder
-         */
-        public Builder ergaenzungsmodul(String val) {
-            ergaenzungsmodul = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code instanz} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code instanz} to set
-         * @return a reference to this Builder
-         */
-        public Builder instanz(String val) {
-            instanz = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code invaliditaetskapital} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code invaliditaetskapital} to set
-         * @return a reference to this Builder
-         */
-        public Builder invaliditaetskapital(String val) {
-            invaliditaetskapital = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code leistungsdauer} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code leistungsdauer} to set
-         * @return a reference to this Builder
-         */
-        public Builder leistungsdauer(String val) {
-            leistungsdauer = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code mutterschaft} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code mutterschaft} to set
-         * @return a reference to this Builder
-         */
-        public Builder mutterschaft(String val) {
-            mutterschaft = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code todesfallkapital} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code todesfallkapital} to set
-         * @return a reference to this Builder
-         */
-        public Builder todesfallkapital(String val) {
-            todesfallkapital = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code unfallSistierung} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code unfallSistierung} to set
-         * @return a reference to this Builder
-         */
-        public Builder unfallSistierung(String val) {
-            unfallSistierung = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code variante} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code variante} to set
-         * @return a reference to this Builder
-         */
-        public Builder variante(String val) {
-            variante = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code versicherterBetrag} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code versicherterBetrag} to set
-         * @return a reference to this Builder
-         */
-        public Builder versicherterBetrag(String val) {
-            versicherterBetrag = val;
-            return this;
-        }
-
-        /**
-         * Sets the {@code versicherterBetragCode} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code versicherterBetragCode} to set
-         * @return a reference to this Builder
-         */
-        public Builder versicherterBetragCode(String val) {
-            versicherterBetragCode = val;
-            return this;
-        }
-
-        /**
-         * Returns a {@code ProductResource} built from the parameters previously set.
-         *
-         * @return a {@code ProductResource} built with parameters of this {@code ProductResource.Builder}
-         */
-        public ProductResource build() {
-            return new ProductResource(this);
-        }
     }
 }
