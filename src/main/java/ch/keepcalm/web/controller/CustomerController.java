@@ -58,7 +58,7 @@ public class CustomerController {
 
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "{id}/product-package")
+    @PostMapping(value = "{id}/productpackage")
     public ProductPackageResource postProductPackage(@RequestBody ProductPackageResource productPackageResource, @PathVariable int id) {
 
 
