@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 
@@ -33,7 +31,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 @RequestMapping(value = "/api/customers", produces = "application/hal+json")
 public class CustomerController {
 
-    private CustomerService customerService;;
+    private CustomerService customerService;
+    ;
     private ProductPackageService productPackageService;
     private CustomerResourceAssembler customerResourceAssembler;
     private ProductPackageResourceAssembler productPackageResourceAssembler;
@@ -74,7 +73,6 @@ public class CustomerController {
     }
 
 
-
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "{id}/productpackage")
@@ -89,7 +87,7 @@ public class CustomerController {
 
         customer.getProductPackages().add(result);
         customerService.updateCustomer(customer);
-$
+
         Link selfLink = new Link(linkTo(CustomerController.class)
                 .slash(id)
                 .slash("productpackage").slash(result.getId()).toUriComponentsBuilder().build().toUriString(), "self");
@@ -102,12 +100,12 @@ $
         productPackageResource.add(updateProductPriceLink);
 
 
-
         return productPackageResource; //customerResourceAssembler.toResource(result);
 
     }
+
     @GetMapping(value = "{id}/productpackage/{productPackageId}")
-    public ProductPackageResource getProductPackage(@PathVariable int id,  @PathVariable int productPackageId) {
+    public ProductPackageResource getProductPackage(@PathVariable int id, @PathVariable int productPackageId) {
         Customer customer = customerService.getCustomer(id);
 
         ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
@@ -119,27 +117,44 @@ $
 
 
     @PatchMapping(value = "{id}/productpackage/{productPackageId}")
-    public ProductPackageResource updateProductPackage(@PathVariable int id,  @PathVariable int productPackageId) throws Exception {
+    public ProductPackageResource updateProductPackage(@PathVariable int id, @PathVariable int productPackageId) throws Exception {
 
-        Customer cus = customerService.getCustomer(id);
+
+        Customer customer = customerService.getCustomer(id);
+        if (productPackageId >= 0 && (productPackageId <= customer.getProductPackages().size() - 1) && (customer.getProductPackages().size() > 0)) {
+            ProductPackage productPackage = customer.getProductPackages().get(productPackageId);
+            Preis price1 = productPackagePriceService.getPrice(customer, productPackage);
+            customer.getProductPackages().get(productPackageId).setBruttoPreis(price1.getBruttoPreis());
+            customer.getProductPackages().get(productPackageId).setNettoPreis(price1.getNettoPreis());
+            Customer customer1 = customerService.updateCustomer(customer);
+            System.out.println(customer1);
+        }
+
+
+       /*
         List<ProductPackage> productPackages = cus.getProductPackages();
+
         for (ProductPackage productPackage : productPackages) {
             if (productPackage.getId() == productPackageId){
+
                 Preis price = productPackagePriceService.getPrice(cus, productPackage);
                 // update price
-                productPackage.setBruttoPreis(price.getBruttoPreis());
-                productPackage.setNettoPreis(price.getNettoPreis());
+              *//*  productPackage.setBruttoPreis(price.getBruttoPreis());
+                productPackage.setNettoPreis(price.getNettoPreis());*//*
+                productPackages.get(productPackageId).setBruttoPreis(price.getBruttoPreis());
+                productPackages.get(productPackageId).setNettoPreis(price.getNettoPreis());
                 // replace this updates package in list
-                cus.getProductPackages().remove(productPackage.getId());
-                cus.getProductPackages().add(productPackage);
+                *//*cus.getProductPackages().remove(productPackage.getId());
+                cus.getProductPackages().add(productPackage);*//*
+
                 break;
             }
-        }
+        }*/
 
 
         ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
         ProductPackageResource productPackageResource = productPackageResourceAssembler.toResource(productPackage);
-        Customer customer = customerService.getCustomer(id);
+
         // call soap
         Preis price = productPackagePriceService.getPrice(customer, productPackage);
 
@@ -156,11 +171,9 @@ $
         System.out.println(customer1);*/
         //destObject.setId(productPackageId);
 
-       // ProductPackage updateProductPackage = productPackageService.updateProductPackage(destObject);
+        // ProductPackage updateProductPackage = productPackageService.updateProductPackage(destObject);
 
         ProductPackageResource updatedProductPackageResource = productPackageResourceAssembler.toResource(productPackage);
-
-
 
 
         // TODO: 25/07/16 HATOAS LINKS
@@ -171,7 +184,6 @@ $
 
 
     /**
-     *
      * @param id
      * @param productPackageId
      * @param productPackageResource
