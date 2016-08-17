@@ -58,16 +58,20 @@ public class CustomerController {
 
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "{id}/productpackage")
-    public ProductPackageResource postProductPackage(@RequestBody ProductPackageResource productPackageResource) {
+    @PostMapping(value = "{id}/product-package")
+    public ProductPackageResource postProductPackage(@RequestBody ProductPackageResource productPackageResource, @PathVariable int id) {
 
 
         Mapper mapper = new DozerBeanMapper();
         ProductPackage destObject = mapper.map(productPackageResource, ProductPackage.class);
-        ProductPackage result = productPackageService.createProductPackage(destObject);
+        ProductPackage productPackageroductPackage = productPackageService.createProductPackage(destObject);
+
+        Customer customer = customerService.getCustomer(id); // TODO: 17/08/16 update customer with product packages
+        customer.getProductPackage().add(productPackageroductPackage);
+        customerService.updateCustomer(customer);
 
 
-        return productPackageResourceAssembler.toResource(result); //customerResourceAssembler.toResource(result);
+        return productPackageResourceAssembler.toResource(productPackageroductPackage); //customerResourceAssembler.toResource(result);
 
     }
 

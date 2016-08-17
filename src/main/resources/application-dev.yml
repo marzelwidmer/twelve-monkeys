@@ -1,0 +1,18 @@
+# Database
+spring:
+  datasource:
+    url: jdbc:h2:~/test;Mode=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate.ddl-auto: create-drop
+
+# Flyway Database Migration
+flyway:
+  clean-on-validation-error: true
+
+# Logging
+logging:
+  level.: info
+  level.org.hibernate: debug

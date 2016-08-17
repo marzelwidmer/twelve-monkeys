@@ -38,8 +38,12 @@ public class Customer implements Serializable {
     private Address address;
 
 
-    @ManyToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
-    private List<Product> products;
+   /* @ManyToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
+    private List<Product> products;*/
+
+    @ManyToMany(targetEntity = ProductPackage.class, cascade = CascadeType.ALL)
+    private List<ProductPackage> productPackage;
+
 
 
 
@@ -103,12 +107,12 @@ public class Customer implements Serializable {
         this.address = address;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<ProductPackage> getProductPackage() {
+        return productPackage;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProductPackage(List<ProductPackage> productPackage) {
+        this.productPackage = productPackage;
     }
 
     public Date getCreatedOn() {
@@ -134,7 +138,7 @@ public class Customer implements Serializable {
                 ", dateOfBirth=" + dateOfBirth +
                 ", gender='" + gender + '\'' +
                 ", address=" + address +
-                ", products=" + products +
+                ", productPackage=" + productPackage +
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 '}';

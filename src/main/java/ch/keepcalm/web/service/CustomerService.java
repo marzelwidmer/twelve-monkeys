@@ -29,14 +29,16 @@ public class CustomerService {
         return repository.findOne(id);
     }
 
-
-
     public List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<Customer>();
         for (Customer model : repository.findAll()) {
             customers.add(model);
         }
         return customers;
+    }
+
+    public Customer updateCustomer(Customer customer) {
+        return repository.save(customer);
     }
 
 
