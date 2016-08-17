@@ -18,7 +18,7 @@ public class IndexController {
     @RequestMapping(method= RequestMethod.GET)
     public ResourceSupport index() throws Exception {
         ResourceSupport index = new ResourceSupport();
-        index.add(linkTo(CustomerController.class).withRel("createCustomers"));
+        index.add(linkTo(CustomerController.class).withRel("createCustomer"));
         index.add(linkTo(IndexController.class).withSelfRel());
         return index;
     }
