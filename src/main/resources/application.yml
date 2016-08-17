@@ -38,6 +38,8 @@ logging:
   level.org.springframework.boot: info
   level.org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: info
 
+  level.org.hibernate: debug
+
 
 # Server
 server:

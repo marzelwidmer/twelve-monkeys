@@ -32,7 +32,6 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private boolean bestPrice = false;
     private BigDecimal price;
     private String unfall;
     private String franchise;
@@ -106,14 +105,6 @@ public class Product implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public boolean isBestPrice() {
-        return bestPrice;
-    }
-
-    public void setBestPrice(boolean bestPrice) {
-        this.bestPrice = bestPrice;
     }
 
     public BigDecimal getPrice() {
@@ -400,7 +391,6 @@ public class Product implements Serializable {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", bestPrice=" + bestPrice +
                 ", price=" + price +
                 ", unfall='" + unfall + '\'' +
                 ", franchise='" + franchise + '\'' +

@@ -4,7 +4,7 @@ import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
-public class CustomerProductPackageResource extends ResourceSupport {
+public class ProductPackageResource extends ResourceSupport {
 
     private boolean bestPrice = false;
 
