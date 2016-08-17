@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified"
+   elementFormDefault="qualified"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieResponse"
+   version="2_0" xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieResponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <element name="berechnePraemieResponse">
+      <complexType>
+         <sequence>
+            <element maxOccurs="1" minOccurs="1" name="personList" type="tns:PersonListType"/>
+            <element maxOccurs="1" minOccurs="1" name="preis" type="tns:Preis"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="GesetzlichePreiskomponente">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="kvg106Betrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0" name="umweltabgabeBetrag" type="xsd:decimal"/>
+      </sequence>
+   </complexType>
+   <complexType name="Person">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="preis" type="tns:Preis"/>
+         <element maxOccurs="1" minOccurs="1"
+            name="vertragsbausteinList" type="tns:VertragsbausteinListType"/>
+      </sequence>
+   </complexType>
+   <complexType name="PersonListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="person" type="tns:Person"/>
+      </sequence>
+   </complexType>
+   <complexType name="Preis">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="bruttoPreis" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="gesetzlichePreiskomponente" type="tns:GesetzlichePreiskomponente"/>
+         <element maxOccurs="1" minOccurs="1" name="nettoPreis" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="preisalternativeList" type="tns:PreisalternativeListType"/>
+         <element maxOccurs="1" minOccurs="0" name="rabatt" type="tns:Rabatt"/>
+      </sequence>
+   </complexType>
+   <complexType name="Preisalternative">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="bruttoPreis" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="nettoPreis" type="xsd:decimal"/>
+      </sequence>
+   </complexType>
+   <complexType name="PreisalternativeListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1"
+            name="preisalternative" type="tns:Preisalternative"/>
+      </sequence>
+   </complexType>
+   <complexType name="Rabatt">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="drittesKindPraemie" type="xsd:boolean"/>
+         <element maxOccurs="1" minOccurs="0" name="einjahrgratisBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="familienrabattBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="kinderJugendrabattBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="kinderStartrabattBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0" name="kollektivrabatt" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="kombinationsrabattBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="mehrjahresvertragBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0" name="partnerrabattBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="ueberrabattierungBetrag" type="xsd:decimal"/>
+      </sequence>
+   </complexType>
+   <complexType name="Vertragsbaustein">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="instanz" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="preis" type="tns:Preis"/>
+         <element maxOccurs="1" minOccurs="1" name="produktId" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <complexType name="VertragsbausteinListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1"
+            name="vertragsbaustein" type="tns:Vertragsbaustein"/>
+      </sequence>
+   </complexType>
+</schema>

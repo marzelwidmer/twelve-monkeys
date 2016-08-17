@@ -34,8 +34,19 @@
 		<!-- Used for Nexus Upload -->
 		<wagon-webdav-jackrabbit.version>2.4</wagon-webdav-jackrabbit.version>
 
+
+
+		<!-- SOAP und XML Mapping -->
+		<wsdlRoot>${project.basedir}/src/main/resources/wsdl</wsdlRoot>
+		<cxf-codegen-plugin.version>3.1.5</cxf-codegen-plugin.version>
+		<cxf-xjc.version>3.0.5</cxf-xjc.version>
+		<cxf-xjc-fluent-api.version>3.0</cxf-xjc-fluent-api.version>
+		<krasa-jaxb-tools.version>1.4</krasa-jaxb-tools.version>
+
 		<!-- Joda -->
 		<joda-time-version>2.8.2</joda-time-version>
+		<!-- Dozer -->
+		<dozer.version>5.4.0</dozer.version>
 
 		<!-- Asciidoc -->
 		<asciidoctor.maven.plugin.version>1.5.3</asciidoctor.maven.plugin.version>
@@ -98,7 +109,7 @@
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
-			<version>5.4.0</version>
+			<version>${dozer.version}</version>
 		</dependency>
 
 		<!-- h2 database-->
@@ -137,6 +148,13 @@
 
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>
+
+
+
+
+
+
+
 		<!--- PluginManagement -->
 		<pluginManagement>
 			<plugins>
@@ -319,6 +337,85 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+
+
+
+
+
+
+
+
+
+			<!-- Apache CXF SOAP / XML Mapping -->
+
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf-codegen-plugin.version}</version>
+				<configuration>
+					<defaultOptions>
+						<extraargs>
+							<!-- generate fluent api: withBlaa(). This is very usefull to write test cases -->
+							<extraarg>-xjc-Xfluent-api</extraarg>
+							<!-- generate boolean getter with isSomething instead of getSomething -->
+							<extraarg>-xjc-Xbgi</extraarg>
+							<!-- generate constructor with default values set -->
+							<extraarg>-xjc-Xdv</extraarg>
+						</extraargs>
+						<bindingFiles>
+							<bindingFile>${project.basedir}/src/main/resources/wsdl/binding.xml</bindingFile>
+							<bindingFile>${project.basedir}/src/main/resources/wsdl/enum-binding.xml
+							</bindingFile>
+						</bindingFiles>
+					</defaultOptions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>wsdl2java</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${wsdlRoot}/Tarif_v2_0.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.github.krasa</groupId>
+						<artifactId>krasa-jaxb-tools</artifactId>
+						<version>${krasa-jaxb-tools.version}</version>
+					</dependency>
+					<!-- https://mvnrepository.com/artifact/org.apache.cxf.xjcplugins/cxf-xjc-boolean -->
+					<dependency>
+						<groupId>org.apache.cxf.xjcplugins</groupId>
+						<artifactId>cxf-xjc-boolean</artifactId>
+						<version>${cxf-xjc.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.cxf.xjcplugins</groupId>
+						<artifactId>cxf-xjc-dv</artifactId>
+						<version>${cxf-xjc.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.cxf.xjcplugins</groupId>
+						<artifactId>cxf-xjc-ts</artifactId>
+						<version>${cxf-xjc.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-fluent-api</artifactId>
+						<version>${cxf-xjc-fluent-api.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 
 		</plugins>
 	</build>

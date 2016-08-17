@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version:Tarif2.0 -->
+<definitions name="Tarif"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:bbpfaults="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisFaults"
+   xmlns:bbprequest="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisRequest"
+   xmlns:bbpresponse="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisResponse"
+   xmlns:bpfaults="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieFaults"
+   xmlns:bprequest="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieRequest"
+   xmlns:bpresponse="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieResponse"
+   xmlns:fpfaults="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteFaults"
+   xmlns:fprequest="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteRequest"
+   xmlns:fpresponse="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteResponse"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2">
+   <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechneBesterPreisFaultsTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisFaults" schemaLocation="TarifBerechneBesterPreisFaultsTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechneBesterPreisRequestTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisRequest" schemaLocation="TarifBerechneBesterPreisRequestTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechneBesterPreisResponseTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisResponse" schemaLocation="TarifBerechneBesterPreisResponseTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechnePraemieFaultsTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieFaults" schemaLocation="TarifBerechnePraemieFaultsTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechnePraemieRequestTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieRequest" schemaLocation="TarifBerechnePraemieRequestTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechnePraemieResponseTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieResponse" schemaLocation="TarifBerechnePraemieResponseTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifFiltereProdukteFaultsTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteFaults" schemaLocation="TarifFiltereProdukteFaultsTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifFiltereProdukteRequestTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteRequest" schemaLocation="TarifFiltereProdukteRequestTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifFiltereProdukteResponseTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteResponse" schemaLocation="TarifFiltereProdukteResponseTypes_v2_0.xsd"/>
+      </schema>
+   </types>
+   <message name="berechneBesterPreisBusinessFaultMessage">
+      <part element="bbpfaults:berechneBesterPreisBusinessFault" name="parameters"/>
+   </message>
+   <message name="berechneBesterPreisRequestMessage">
+      <part element="bbprequest:berechneBesterPreisRequest" name="parameters"/>
+   </message>
+   <message name="berechneBesterPreisResponseMessage">
+      <part element="bbpresponse:berechneBesterPreisResponse" name="parameters"/>
+   </message>
+   <message name="berechneBesterPreisSystemFaultMessage">
+      <part element="bbpfaults:berechneBesterPreisSystemFault" name="parameters"/>
+   </message>
+   <message name="berechnePraemieBusinessFaultMessage">
+      <part element="bpfaults:berechnePraemieBusinessFault" name="parameters"/>
+   </message>
+   <message name="berechnePraemieRequestMessage">
+      <part element="bprequest:berechnePraemieRequest" name="parameters"/>
+   </message>
+   <message name="berechnePraemieResponseMessage">
+      <part element="bpresponse:berechnePraemieResponse" name="parameters"/>
+   </message>
+   <message name="berechnePraemieSystemFaultMessage">
+      <part element="bpfaults:berechnePraemieSystemFault" name="parameters"/>
+   </message>
+   <message name="filtereProdukteBusinessFaultMessage">
+      <part element="fpfaults:filtereProdukteBusinessFault" name="parameters"/>
+   </message>
+   <message name="filtereProdukteRequestMessage">
+      <part element="fprequest:filtereProdukteRequest" name="parameters"/>
+   </message>
+   <message name="filtereProdukteResponseMessage">
+      <part element="fpresponse:filtereProdukteResponse" name="parameters"/>
+   </message>
+   <message name="filtereProdukteSystemFaultMessage">
+      <part element="fpfaults:filtereProdukteSystemFault" name="parameters"/>
+   </message>
+   <portType name="TarifPortType">
+      <operation name="berechneBesterPreis">
+         <input message="tns:berechneBesterPreisRequestMessage" name="berechneBesterPreisRequest"/>
+         <output message="tns:berechneBesterPreisResponseMessage" name="berechneBesterPreisResponse"/>
+         <fault message="tns:berechneBesterPreisBusinessFaultMessage" name="berechneBesterPreisBusinessFault"/>
+         <fault message="tns:berechneBesterPreisSystemFaultMessage" name="berechneBesterPreisSystemFault"/>
+      </operation>
+      <operation name="berechnePraemie">
+         <input message="tns:berechnePraemieRequestMessage" name="berechnePraemieRequest"/>
+         <output message="tns:berechnePraemieResponseMessage" name="berechnePraemieResponse"/>
+         <fault message="tns:berechnePraemieBusinessFaultMessage" name="berechnePraemieBusinessFault"/>
+         <fault message="tns:berechnePraemieSystemFaultMessage" name="berechnePraemieSystemFault"/>
+      </operation>
+      <operation name="filtereProdukte">
+         <input message="tns:filtereProdukteRequestMessage" name="filtereProdukteRequest"/>
+         <output message="tns:filtereProdukteResponseMessage" name="filtereProdukteResponse"/>
+         <fault message="tns:filtereProdukteBusinessFaultMessage" name="filtereProdukteBusinessFault"/>
+         <fault message="tns:filtereProdukteSystemFaultMessage" name="filtereProdukteSystemFault"/>
+      </operation>
+   </portType>
+   <binding name="TarifSOAPhttp" type="tns:TarifPortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="berechneBesterPreis">
+         <soap:operation soapAction="berechneBesterPreis" style="document"/>
+         <input name="berechneBesterPreisRequest">
+            <soap:body use="literal"/>
+         </input>
+         <output name="berechneBesterPreisResponse">
+            <soap:body use="literal"/>
+         </output>
+         <fault name="berechneBesterPreisBusinessFault">
+            <soap:fault name="berechneBesterPreisBusinessFault" use="literal"/>
+         </fault>
+         <fault name="berechneBesterPreisSystemFault">
+            <soap:fault name="berechneBesterPreisSystemFault" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="berechnePraemie">
+         <soap:operation soapAction="berechnePraemie" style="document"/>
+         <input name="berechnePraemieRequest">
+            <soap:body use="literal"/>
+         </input>
+         <output name="berechnePraemieResponse">
+            <soap:body use="literal"/>
+         </output>
+         <fault name="berechnePraemieBusinessFault">
+            <soap:fault name="berechnePraemieBusinessFault" use="literal"/>
+         </fault>
+         <fault name="berechnePraemieSystemFault">
+            <soap:fault name="berechnePraemieSystemFault" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="filtereProdukte">
+         <soap:operation soapAction="filtereProdukte" style="document"/>
+         <input name="filtereProdukteRequest">
+            <soap:body use="literal"/>
+         </input>
+         <output name="filtereProdukteResponse">
+            <soap:body use="literal"/>
+         </output>
+         <fault name="filtereProdukteBusinessFault">
+            <soap:fault name="filtereProdukteBusinessFault" use="literal"/>
+         </fault>
+         <fault name="filtereProdukteSystemFault">
+            <soap:fault name="filtereProdukteSystemFault" use="literal"/>
+         </fault>
+      </operation>
+   </binding>
+   <service name="Tarif">
+      <port binding="tns:TarifSOAPhttp" name="TarifPort">
+         <soap:address location="http://services.helsana.ch/spezialfunktionen/tarif/v2"/>
+      </port>
+   </service>
+</definitions>

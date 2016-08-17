@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version:Tarif_berechneBesterPreis2.0 -->
+<definitions name="Tarif_berechneBesterPreis"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:bbpfaults="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisFaults"
+   xmlns:bbprequest="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisRequest"
+   xmlns:bbpresponse="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisResponse"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2">
+   <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechneBesterPreisFaultsTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisFaults" schemaLocation="TarifBerechneBesterPreisFaultsTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechneBesterPreisRequestTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisRequest" schemaLocation="TarifBerechneBesterPreisRequestTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechneBesterPreisResponseTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisResponse" schemaLocation="TarifBerechneBesterPreisResponseTypes_v2_0.xsd"/>
+      </schema>
+   </types>
+   <message name="berechneBesterPreisBusinessFaultMessage">
+      <part element="bbpfaults:berechneBesterPreisBusinessFault" name="parameters"/>
+   </message>
+   <message name="berechneBesterPreisRequestMessage">
+      <part element="bbprequest:berechneBesterPreisRequest" name="parameters"/>
+   </message>
+   <message name="berechneBesterPreisResponseMessage">
+      <part element="bbpresponse:berechneBesterPreisResponse" name="parameters"/>
+   </message>
+   <message name="berechneBesterPreisSystemFaultMessage">
+      <part element="bbpfaults:berechneBesterPreisSystemFault" name="parameters"/>
+   </message>
+   <portType name="Tarif_berechneBesterPreisPortType">
+      <operation name="berechneBesterPreis">
+         <input message="tns:berechneBesterPreisRequestMessage" name="berechneBesterPreisRequest"/>
+         <output message="tns:berechneBesterPreisResponseMessage" name="berechneBesterPreisResponse"/>
+         <fault message="tns:berechneBesterPreisBusinessFaultMessage" name="berechneBesterPreisBusinessFault"/>
+         <fault message="tns:berechneBesterPreisSystemFaultMessage" name="berechneBesterPreisSystemFault"/>
+      </operation>
+   </portType>
+   <binding name="Tarif_berechneBesterPreisSOAPhttp" type="tns:Tarif_berechneBesterPreisPortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="berechneBesterPreis">
+         <soap:operation soapAction="berechneBesterPreis" style="document"/>
+         <input name="berechneBesterPreisRequest">
+            <soap:body use="literal"/>
+         </input>
+         <output name="berechneBesterPreisResponse">
+            <soap:body use="literal"/>
+         </output>
+         <fault name="berechneBesterPreisBusinessFault">
+            <soap:fault name="berechneBesterPreisBusinessFault" use="literal"/>
+         </fault>
+         <fault name="berechneBesterPreisSystemFault">
+            <soap:fault name="berechneBesterPreisSystemFault" use="literal"/>
+         </fault>
+      </operation>
+   </binding>
+   <service name="Tarif_berechneBesterPreis">
+      <port binding="tns:Tarif_berechneBesterPreisSOAPhttp" name="Tarif_berechneBesterPreisPort">
+         <soap:address location="http://services.helsana.ch/spezialfunktionen/tarif/v2"/>
+      </port>
+   </service>
+</definitions>

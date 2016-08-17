@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified"
+   elementFormDefault="qualified"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisFaults"
+   version="2_0" xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:bt="http://services.helsana.ch/common/basisdatentypen/v1"
+   xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisFaults" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <import
+      namespace="http://services.helsana.ch/common/basisdatentypen/v1" schemaLocation="BasisdatenTypes_v1_0.xsd"/>
+   <element name="berechneBesterPreisBusinessFault">
+      <complexType>
+         <complexContent>
+            <extension base="bt:BusinessCommonFault">
+               <sequence>
+                  <element maxOccurs="1" minOccurs="0"
+                     name="correlationId" type="xsd:string"/>
+                  <element maxOccurs="1" minOccurs="1" name="errorCode" type="xsd:string"/>
+               </sequence>
+            </extension>
+         </complexContent>
+      </complexType>
+   </element>
+   <element name="berechneBesterPreisSystemFault">
+      <complexType>
+         <complexContent>
+            <extension base="bt:SystemCommonFault">
+               <sequence>
+                  <element maxOccurs="1" minOccurs="0"
+                     name="correlationId" type="xsd:string"/>
+               </sequence>
+            </extension>
+         </complexContent>
+      </complexType>
+   </element>
+</schema>

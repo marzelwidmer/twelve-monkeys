@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified"
+   elementFormDefault="qualified"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteResponse"
+   version="2_0" xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteResponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <complexType name="DefaultWert">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="wert" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <element name="filtereProdukteResponse">
+      <complexType>
+         <sequence>
+            <element maxOccurs="1" minOccurs="1" name="personList" type="tns:PersonListType"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="Parameter">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="defaultWert" type="tns:DefaultWert"/>
+         <element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="wertbereichList" type="tns:WertbereichListType"/>
+      </sequence>
+   </complexType>
+   <complexType name="ParameterListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="parameter" type="tns:Parameter"/>
+      </sequence>
+   </complexType>
+   <complexType name="Person">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="produktList" type="tns:ProduktListType"/>
+      </sequence>
+   </complexType>
+   <complexType name="PersonListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="person" type="tns:Person"/>
+      </sequence>
+   </complexType>
+   <complexType name="Produkt">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="parameterList" type="tns:ParameterListType"/>
+         <element maxOccurs="1" minOccurs="1" name="produktId" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <complexType name="ProduktListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="produkt" type="tns:Produkt"/>
+      </sequence>
+   </complexType>
+   <complexType name="Wertbereich">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="maxWert" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0" name="minWert" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0" name="wert" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <complexType name="WertbereichListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="wertbereich" type="tns:Wertbereich"/>
+      </sequence>
+   </complexType>
+</schema>

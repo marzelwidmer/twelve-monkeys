@@ -20,6 +20,7 @@ info.build:
   version: @project.version@
 
 
+
 # Management
 management:
   address: ${server.address}
@@ -32,14 +33,25 @@ endpoints.health:
   sensitive: false
 
 
+# SOAP
+soap:
+  wsdl: classpath:wsdl/Tarif_v2_0.wsdl
+  portname: TarifPort
+  servicename: Tarif
+  namespace: http://services.helsana.ch/spezialfunktionen/tarif/v2
+  endpoint:
+    #server: http://services.spfkern-test.hel.kko.ch
+    server: http://services.spf-go-preprod.hel.kko.ch
+    path: soa-infra/services/businessdomain_spezialfunktionen/Tarif_v2_ebs
+    url: ${soap.endpoint.server}/${soap.endpoint.path}
+    service: ${soap.endpoint.url}/Tarif
+
+
 # Logging
 logging:
   level.: warn
   level.org.springframework.boot: info
   level.org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: info
-
-  level.org.hibernate: debug
-
 
 # Server
 server:

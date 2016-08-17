@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version:Tarif_berechnePraemie2.0 -->
+<definitions name="Tarif_berechnePraemie"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:bpfaults="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieFaults"
+   xmlns:bprequest="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieRequest"
+   xmlns:bpresponse="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieResponse"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2">
+   <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechnePraemieFaultsTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieFaults" schemaLocation="TarifBerechnePraemieFaultsTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechnePraemieRequestTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieRequest" schemaLocation="TarifBerechnePraemieRequestTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifBerechnePraemieResponseTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieResponse" schemaLocation="TarifBerechnePraemieResponseTypes_v2_0.xsd"/>
+      </schema>
+   </types>
+   <message name="berechnePraemieBusinessFaultMessage">
+      <part element="bpfaults:berechnePraemieBusinessFault" name="parameters"/>
+   </message>
+   <message name="berechnePraemieRequestMessage">
+      <part element="bprequest:berechnePraemieRequest" name="parameters"/>
+   </message>
+   <message name="berechnePraemieResponseMessage">
+      <part element="bpresponse:berechnePraemieResponse" name="parameters"/>
+   </message>
+   <message name="berechnePraemieSystemFaultMessage">
+      <part element="bpfaults:berechnePraemieSystemFault" name="parameters"/>
+   </message>
+   <portType name="Tarif_berechnePraemiePortType">
+      <operation name="berechnePraemie">
+         <input message="tns:berechnePraemieRequestMessage" name="berechnePraemieRequest"/>
+         <output message="tns:berechnePraemieResponseMessage" name="berechnePraemieResponse"/>
+         <fault message="tns:berechnePraemieBusinessFaultMessage" name="berechnePraemieBusinessFault"/>
+         <fault message="tns:berechnePraemieSystemFaultMessage" name="berechnePraemieSystemFault"/>
+      </operation>
+   </portType>
+   <binding name="Tarif_berechnePraemieSOAPhttp" type="tns:Tarif_berechnePraemiePortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="berechnePraemie">
+         <soap:operation soapAction="berechnePraemie" style="document"/>
+         <input name="berechnePraemieRequest">
+            <soap:body use="literal"/>
+         </input>
+         <output name="berechnePraemieResponse">
+            <soap:body use="literal"/>
+         </output>
+         <fault name="berechnePraemieBusinessFault">
+            <soap:fault name="berechnePraemieBusinessFault" use="literal"/>
+         </fault>
+         <fault name="berechnePraemieSystemFault">
+            <soap:fault name="berechnePraemieSystemFault" use="literal"/>
+         </fault>
+      </operation>
+   </binding>
+   <service name="Tarif_berechnePraemie">
+      <port binding="tns:Tarif_berechnePraemieSOAPhttp" name="Tarif_berechnePraemiePort">
+         <soap:address location="http://services.helsana.ch/spezialfunktionen/tarif/v2"/>
+      </port>
+   </service>
+</definitions>

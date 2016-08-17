@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified"
+   elementFormDefault="qualified"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisResponse"
+   version="2_0" xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechneBesterPreisResponse" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <element name="berechneBesterPreisResponse">
+      <complexType>
+         <sequence>
+            <element maxOccurs="1" minOccurs="1" name="produktList" type="tns:ProduktListType"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="Preis">
+      <sequence>
+         <element maxOccurs="1" minOccurs="1" name="nettoPreis" type="xsd:decimal"/>
+      </sequence>
+   </complexType>
+   <complexType name="ProduktListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="produkt" type="tns:Vertragsbaustein"/>
+      </sequence>
+   </complexType>
+   <complexType name="Vertragsbaustein">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="instanz" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="marke" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="preis" type="tns:Preis"/>
+         <element maxOccurs="1" minOccurs="1" name="produktId" type="xsd:string"/>
+      </sequence>
+   </complexType>
+</schema>

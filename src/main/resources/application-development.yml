@@ -1,0 +1,31 @@
+# Database
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@ora-owset00:1521:OWSET00
+    username: SENTUSER
+    password: RVIt6TyY
+    driverClassName: oracle.jdbc.driver.OracleDriver
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    properties.hibernate.default_schema: SENTADM
+    hibernate.ddl-auto: validate
+
+
+# Flyway
+flyway:
+  enabled: true
+  # Database specific statements can be prefixed with ${oracle} or ${h2} in the flyway database scripts
+  # eg. grants on specific permissions only work with oracle: ${oracle} grant select on users to ${grant.user}.
+  # To enable oracle/h2 statements you leave the respective value empty and to disable you fill in the value --.
+  placeholders:
+    oracle:
+    h2: --
+  url: ${spring.datasource.url}
+  user: SENTADM
+  password: f90sBM5i
+
+# Logging
+logging:
+  level.: info
+  level.org.hibernate: debug

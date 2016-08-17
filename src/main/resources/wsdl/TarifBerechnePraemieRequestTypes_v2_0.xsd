@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified"
+   elementFormDefault="qualified"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieRequest"
+   version="2_0" xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2/berechnePraemieRequest" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <element name="berechnePraemieRequest">
+      <complexType>
+         <sequence>
+            <element maxOccurs="1" minOccurs="0" name="correlationId" type="xsd:string"/>
+            <element maxOccurs="1" minOccurs="1" name="personList" type="tns:PersonListType"/>
+            <element maxOccurs="1" minOccurs="1"
+               name="versicherungsvertrag" type="tns:Versicherungsvertrag"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="Kollektivvertrag">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="callerId" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="nummer" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="personalNummer" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="personengruppe" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <complexType name="Leistungserbringer">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="avmNetz" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="avmNetzId" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="Id" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <complexType name="Person">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="beantragterRabatt" type="tns:Rabatt"/>
+         <element maxOccurs="1" minOccurs="1" name="geburtsdatum" type="xsd:date"/>
+         <element maxOccurs="1" minOccurs="1" name="geschlecht" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="kollektivvertrag" type="tns:Kollektivvertrag"/>
+         <element maxOccurs="1" minOccurs="1" name="produktList" type="tns:ProduktListType"/>
+         <element maxOccurs="1" minOccurs="0" name="vertragsdauer" type="xsd:integer"/>
+      </sequence>
+   </complexType>
+   <complexType name="PersonListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="person" type="tns:Person"/>
+      </sequence>
+   </complexType>
+   <complexType name="ProduktListType">
+      <sequence>
+         <element maxOccurs="unbounded" minOccurs="1" name="produkt" type="tns:Vertragsbaustein"/>
+      </sequence>
+   </complexType>
+   <complexType name="Rabatt">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="kinderStartRabatt" type="xsd:boolean"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="kollektivvertragNummer" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="kollektivvertragPersonengruppe" type="xsd:string"/>
+      </sequence>
+   </complexType>
+   <complexType name="Versicherungsvertrag">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="gemeindeNummer" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="land" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="postleitzahl" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="postleitzahlZusatz" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="vertragsbeginn" type="xsd:date"/>
+      </sequence>
+   </complexType>
+   <complexType name="Vertragsbaustein">
+      <sequence>
+         <element maxOccurs="1" minOccurs="0" name="arzt" type="tns:Leistungserbringer"/>
+         <element maxOccurs="1" minOccurs="0" name="drittesKind" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="eintrittsalter" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="ergaenzungsmodul" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="franchise" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="instanz" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="invaliditaetskapital" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="leistungsdauer" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="mutterschaft" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="1" name="produktId" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="todesfallkapital" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="unfall" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="unfallSistierung" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0" name="variante" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="versicherterBetrag" type="xsd:decimal"/>
+         <element maxOccurs="1" minOccurs="0"
+            name="versicherterBetragCode" type="xsd:string"/>
+         <element maxOccurs="1" minOccurs="0" name="wartefrist" type="xsd:string"/>
+      </sequence>
+   </complexType>
+</schema>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version:Tarif_filtereProdukte2.0 -->
+<definitions name="Tarif_filtereProdukte"
+   targetNamespace="http://services.helsana.ch/spezialfunktionen/tarif/v2"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:fpfaults="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteFaults"
+   xmlns:fprequest="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteRequest"
+   xmlns:fpresponse="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteResponse"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.helsana.ch/spezialfunktionen/tarif/v2">
+   <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifFiltereProdukteFaultsTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteFaults" schemaLocation="TarifFiltereProdukteFaultsTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifFiltereProdukteRequestTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteRequest" schemaLocation="TarifFiltereProdukteRequestTypes_v2_0.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <!-- Version:TarifFiltereProdukteResponseTypes2_0 -->
+         <import
+            namespace="http://services.helsana.ch/spezialfunktionen/tarif/v2/filtereProdukteResponse" schemaLocation="TarifFiltereProdukteResponseTypes_v2_0.xsd"/>
+      </schema>
+   </types>
+   <message name="filtereProdukteBusinessFaultMessage">
+      <part element="fpfaults:filtereProdukteBusinessFault" name="parameters"/>
+   </message>
+   <message name="filtereProdukteRequestMessage">
+      <part element="fprequest:filtereProdukteRequest" name="parameters"/>
+   </message>
+   <message name="filtereProdukteResponseMessage">
+      <part element="fpresponse:filtereProdukteResponse" name="parameters"/>
+   </message>
+   <message name="filtereProdukteSystemFaultMessage">
+      <part element="fpfaults:filtereProdukteSystemFault" name="parameters"/>
+   </message>
+   <portType name="Tarif_filtereProduktePortType">
+      <operation name="filtereProdukte">
+         <input message="tns:filtereProdukteRequestMessage" name="filtereProdukteRequest"/>
+         <output message="tns:filtereProdukteResponseMessage" name="filtereProdukteResponse"/>
+         <fault message="tns:filtereProdukteBusinessFaultMessage" name="filtereProdukteBusinessFault"/>
+         <fault message="tns:filtereProdukteSystemFaultMessage" name="filtereProdukteSystemFault"/>
+      </operation>
+   </portType>
+   <binding name="Tarif_filtereProdukteSOAPhttp" type="tns:Tarif_filtereProduktePortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="filtereProdukte">
+         <soap:operation soapAction="filtereProdukte" style="document"/>
+         <input name="filtereProdukteRequest">
+            <soap:body use="literal"/>
+         </input>
+         <output name="filtereProdukteResponse">
+            <soap:body use="literal"/>
+         </output>
+         <fault name="filtereProdukteBusinessFault">
+            <soap:fault name="filtereProdukteBusinessFault" use="literal"/>
+         </fault>
+         <fault name="filtereProdukteSystemFault">
+            <soap:fault name="filtereProdukteSystemFault" use="literal"/>
+         </fault>
+      </operation>
+   </binding>
+   <service name="Tarif_filtereProdukte">
+      <port binding="tns:Tarif_filtereProdukteSOAPhttp" name="Tarif_filtereProduktePort">
+         <soap:address location="http://services.helsana.ch/spezialfunktionen/tarif/v2"/>
+      </port>
+   </service>
+</definitions>
