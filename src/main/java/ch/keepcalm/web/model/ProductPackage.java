@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
@@ -17,35 +15,31 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by marcelwidmer on 21/03/16.
+ */
 @Entity
-public class Customer implements Serializable {
+public class ProductPackage implements Serializable {
+
 
     /*@Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;*/
+     @GeneratedValue(generator = "system-uuid")
+     @GenericGenerator(name = "system-uuid", strategy = "uuid")
+     private String id;*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private Date dateOfBirth;
-    private String gender;
+    private boolean bestPrice = false;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
-
-
-    @ManyToMany(targetEntity = ProductPackage.class, cascade = CascadeType.ALL)
-    private List<ProductPackage> productPackages;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Product> products;
 
 
     @Temporal(TemporalType.TIMESTAMP)
-    // TODO: 05.08.2016  RestDocs issue @Column(nullable = false, name = "CREATED_ON")
-    @Column(nullable = true, name = "CREATED_ON")
+    @Column(nullable = false, name = "CREATED_ON")
     private Date createdOn;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -67,8 +61,7 @@ public class Customer implements Serializable {
     /**
      * Used for Entity
      */
-    public Customer() {
-
+    public ProductPackage() {
     }
 
     public int getId() {
@@ -79,36 +72,20 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public boolean isBestPrice() {
+        return bestPrice;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setBestPrice(boolean bestPrice) {
+        this.bestPrice = bestPrice;
     }
 
-    public String getGender() {
-        return gender;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public List<ProductPackage> getProductPackages() {
-        return productPackages;
-    }
-
-    public void setProductPackages(List<ProductPackage> productPackages) {
-        this.productPackages = productPackages;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Date getCreatedOn() {
@@ -129,12 +106,10 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "ProductPackage{" +
                 "id=" + id +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender='" + gender + '\'' +
-                ", address=" + address +
-                ", productPackages=" + productPackages +
+                ", bestPrice=" + bestPrice +
+                ", products=" + products +
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 '}';

@@ -5,8 +5,10 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.List;
 
 public class CustomerProductPackageResource extends ResourceSupport {
+
+    private boolean bestPrice = false;
+
     private List<ProductResource> products;
-    private String customerId;
 
     public List<ProductResource> getProducts() {
         return products;
@@ -16,11 +18,11 @@ public class CustomerProductPackageResource extends ResourceSupport {
         this.products = products;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public boolean isBestPrice() {
+        return bestPrice;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setBestPrice(boolean bestPrice) {
+        this.bestPrice = bestPrice;
     }
 }

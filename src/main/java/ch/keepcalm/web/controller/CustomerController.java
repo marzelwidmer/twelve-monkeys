@@ -2,11 +2,12 @@ package ch.keepcalm.web.controller;
 
 import ch.keepcalm.web.controller.assembler.CustomerResourceAssembler;
 import ch.keepcalm.web.model.Customer;
-import ch.keepcalm.web.model.Product;
-import ch.keepcalm.web.resource.CustomerResource;
+import ch.keepcalm.web.model.ProductPackage;
 import ch.keepcalm.web.resource.CustomerProductPackageResource;
+import ch.keepcalm.web.resource.CustomerResource;
 import ch.keepcalm.web.resource.ProductResource;
 import ch.keepcalm.web.service.CustomerService;
+import ch.keepcalm.web.service.ProductPackageService;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/customers", produces = "application/hal+json")
 public class CustomerController {
 
-    private CustomerService service;
+    private CustomerService customerService;;
+    private ProductPackageService productPackageService;
     private CustomerResourceAssembler resourceAssembler;
 
     @Autowired
-    public void setCustomerController(CustomerService customerService, CustomerResourceAssembler customerResourceAssembler) {
-        this.service = customerService;
+    public void setCustomerController(CustomerService customerService, CustomerResourceAssembler customerResourceAssembler, ProductPackageService productPackageService) {
+        this.customerService = customerService;
         this.resourceAssembler = customerResourceAssembler;
+        this.productPackageService = productPackageService;
     }
 
 
@@ -40,7 +43,7 @@ public class CustomerController {
 
         Mapper mapper = new DozerBeanMapper();
         Customer destObject = mapper.map(customerResource, Customer.class);
-        Customer result = service.createCustomer(destObject);
+        Customer result = customerService.createCustomer(destObject);
 
         return resourceAssembler.toResource(result);
 
@@ -50,16 +53,14 @@ public class CustomerController {
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "{id}/productpackage")
-    public ProductResource postProductPackage(@RequestBody CustomerProductPackageResource productResource) {
+    public ProductResource postProductPackage(@RequestBody CustomerProductPackageResource productPackageResource) {
+
 
         Mapper mapper = new DozerBeanMapper();
-        for (ProductResource resource : productResource.getProducts()) {
-            Product destObject = mapper.map(resource, Product.class);
-            Product result = service.createProduct(destObject);
+        ProductPackage destObject = mapper.map(productPackageResource, ProductPackage.class);
+        ProductPackage result = productPackageService.createProductPackage(destObject);
 
-        }
-
-
+        System.out.println(result.getProducts().size());
         return null; //resourceAssembler.toResource(result);
 
     }
@@ -67,7 +68,7 @@ public class CustomerController {
 
     @GetMapping(value = "{id}")
     public CustomerResource getCustomer(@PathVariable int id) {
-        return resourceAssembler.toResource(service.getCustomer(id));
+        return resourceAssembler.toResource(customerService.getCustomer(id));
     }
 
 }

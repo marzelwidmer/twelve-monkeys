@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 
 public class ProductResource  extends ResourceSupport {
 
-    private boolean bestPrice = false;
     private BigDecimal price;
     private String unfall;
     private String franchise;
@@ -48,13 +47,7 @@ public class ProductResource  extends ResourceSupport {
     public ProductResource() {
     }
 
-    public boolean isBestPrice() {
-        return bestPrice;
-    }
 
-    public void setBestPrice(boolean bestPrice) {
-        this.bestPrice = bestPrice;
-    }
 
     public BigDecimal getPrice() {
         return price;
@@ -315,7 +308,6 @@ public class ProductResource  extends ResourceSupport {
     @Override
     public String toString() {
         return "ProductResource{" +
-                "bestPrice=" + bestPrice +
                 ", price=" + price +
                 ", unfall='" + unfall + '\'' +
                 ", franchise='" + franchise + '\'' +
