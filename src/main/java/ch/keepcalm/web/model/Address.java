@@ -121,18 +121,4 @@ public class Address  implements Serializable {
     public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
     }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", municipality='" + municipality + '\'' +
-                ", municipalityNr='" + municipalityNr + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", postalCodeAddition='" + postalCodeAddition + '\'' +
-                ", locality='" + locality + '\'' +
-                ", createdOn=" + createdOn +
-                ", updatedOn=" + updatedOn +
-                '}';
-    }
 }

@@ -21,11 +21,8 @@ public class CustomerResourceAssembler extends ResourceAssemblerSupport<Customer
     @Override
     public CustomerResource toResource(Customer customer) {
 
-        // api/customers/1; rel="self
-        CustomerResource customerResource = createResourceWithId(customer.getId(), customer);
-
         Mapper mapper = new DozerBeanMapper();
-        customerResource = mapper.map(customer, CustomerResource.class);
+        CustomerResource customerResource = mapper.map(customer, CustomerResource.class);
 
         Link self = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())

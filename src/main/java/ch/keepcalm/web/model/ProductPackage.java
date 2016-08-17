@@ -232,28 +232,5 @@ public class ProductPackage implements Serializable {
         this.updatedOn = updatedOn;
     }
 
-    @Override
-    public String toString() {
-        return "ProductPackage{" +
-                "id=" + id +
-                ", bestPrice=" + bestPrice +
-                ", bruttoPreis=" + bruttoPreis +
-                ", nettoPreis=" + nettoPreis +
-                ", kvg106Betrag=" + kvg106Betrag +
-                ", umweltabgabeBetrag=" + umweltabgabeBetrag +
-                ", drittesKindPraemie=" + drittesKindPraemie +
-                ", einjahrgratisBetrag=" + einjahrgratisBetrag +
-                ", familienrabattBetrag=" + familienrabattBetrag +
-                ", kinderJugendrabattBetrag=" + kinderJugendrabattBetrag +
-                ", kinderStartrabattBetrag=" + kinderStartrabattBetrag +
-                ", kollektivrabatt=" + kollektivrabatt +
-                ", kombinationsrabattBetrag=" + kombinationsrabattBetrag +
-                ", mehrjahresvertragBetrag=" + mehrjahresvertragBetrag +
-                ", partnerrabattBetrag=" + partnerrabattBetrag +
-                ", ueberrabattierungBetrag=" + ueberrabattierungBetrag +
-                ", products=" + products +
-                ", createdOn=" + createdOn +
-                ", updatedOn=" + updatedOn +
-                '}';
-    }
+
 }

@@ -261,31 +261,4 @@ public class Product implements Serializable {
         this.updatedOn = updatedOn;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", price=" + price +
-                ", unfall='" + unfall + '\'' +
-                ", franchise='" + franchise + '\'' +
-                ", drittesKind='" + drittesKind + '\'' +
-                ", description='" + description + '\'' +
-                ", produktId='" + produktId + '\'' +
-                ", avmNetz='" + avmNetz + '\'' +
-                ", eintrittsalter='" + eintrittsalter + '\'' +
-                ", ergaenzungsmodul='" + ergaenzungsmodul + '\'' +
-                ", instanz='" + instanz + '\'' +
-                ", invaliditaetskapital='" + invaliditaetskapital + '\'' +
-                ", leistungsdauer='" + leistungsdauer + '\'' +
-                ", mutterschaft='" + mutterschaft + '\'' +
-                ", todesfallkapital='" + todesfallkapital + '\'' +
-                ", unfallSistierung='" + unfallSistierung + '\'' +
-                ", variante='" + variante + '\'' +
-                ", versicherterBetrag='" + versicherterBetrag + '\'' +
-                ", versicherterBetragCode='" + versicherterBetragCode + '\'' +
-                ", productPackages=" + productPackages +
-                ", createdOn=" + createdOn +
-                ", updatedOn=" + updatedOn +
-                '}';
-    }
 }

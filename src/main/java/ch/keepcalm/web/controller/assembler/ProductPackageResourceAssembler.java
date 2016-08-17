@@ -5,8 +5,11 @@ import ch.keepcalm.web.model.ProductPackage;
 import ch.keepcalm.web.resource.ProductPackageResource;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @ControllerAdvice
 public class ProductPackageResourceAssembler extends ResourceAssemblerSupport<ProductPackage, ProductPackageResource> {
@@ -17,13 +20,13 @@ public class ProductPackageResourceAssembler extends ResourceAssemblerSupport<Pr
 
     @Override
     public ProductPackageResource toResource(ProductPackage productPackage) {
-
-        // api/customers/1; rel="self
-        ProductPackageResource productPackageResource = createResourceWithId(productPackage.getId(), productPackage);
-
         Mapper mapper = new DozerBeanMapper();
-        productPackageResource = mapper.map(productPackage, ProductPackageResource.class);
+        ProductPackageResource productPackageResource = mapper.map(productPackage, ProductPackageResource.class);
 
+        Link self = new Link(linkTo(CustomerController.class)
+                .slash(productPackage.getId())
+                .toUriComponentsBuilder().build().toUriString(), "self");
+        productPackageResource.add(self);
 
 
         return productPackageResource;

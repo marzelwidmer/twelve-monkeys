@@ -22,4 +22,10 @@ public class ProductPackageService {
         return repository.save(productPackage);
     }
 
+
+
+    public ProductPackage getProductPackage(int id) {
+        return repository.findOne(id);
+    }
+
 }

@@ -130,17 +130,4 @@ public class Customer implements Serializable {
     public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
     }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender='" + gender + '\'' +
-                ", address=" + address +
-                ", productPackage=" + productPackage +
-                ", createdOn=" + createdOn +
-                ", updatedOn=" + updatedOn +
-                '}';
-    }
 }

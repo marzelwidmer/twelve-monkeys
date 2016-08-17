@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/api/customers", produces = "application/hal+json")
@@ -55,30 +57,37 @@ public class CustomerController {
 
     }
 
+    @GetMapping(value = "{id}")
+    public CustomerResource getCustomer(@PathVariable int id) {
+        return customerResourceAssembler.toResource(customerService.getCustomer(id));
+    }
+
+
 
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "{id}/productpackage")
     public ProductPackageResource postProductPackage(@RequestBody ProductPackageResource productPackageResource, @PathVariable int id) {
 
-
         Mapper mapper = new DozerBeanMapper();
         ProductPackage destObject = mapper.map(productPackageResource, ProductPackage.class);
-        ProductPackage productPackageroductPackage = productPackageService.createProductPackage(destObject);
+        ProductPackage result = productPackageService.createProductPackage(destObject);
 
         Customer customer = customerService.getCustomer(id); // TODO: 17/08/16 update customer with product packages
-        customer.getProductPackage().add(productPackageroductPackage);
+        List<ProductPackage> productPackage = customer.getProductPackage();
+
+
+        customer.getProductPackage().add(result);
         customerService.updateCustomer(customer);
 
 
-        return productPackageResourceAssembler.toResource(productPackageroductPackage); //customerResourceAssembler.toResource(result);
+        return productPackageResourceAssembler.toResource(result); //customerResourceAssembler.toResource(result);
 
     }
-
-
-    @GetMapping(value = "{id}")
-    public CustomerResource getCustomer(@PathVariable int id) {
-        return customerResourceAssembler.toResource(customerService.getCustomer(id));
+    @GetMapping(value = "{id}/productpackage/{productPackageId}")
+    public ProductPackageResource getProductPackage(@PathVariable int id,  @PathVariable int productPackageId) {
+        ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
+        return productPackageResourceAssembler.toResource(productPackage); //customerResourceAssembler.toResource(customerService.getCustomer(id));
     }
 
 }
