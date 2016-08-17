@@ -49,7 +49,7 @@ public class CustomerController {
 
     // TODO: 16/08/16 implement me... or refactor it in own controller class ?
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "{id}/product_package")
+    @PostMapping(value = "{id}/productpackage")
     public ProductResource postProductPackage(@RequestBody CustomerProductPackageResource productResource) {
 
         Mapper mapper = new DozerBeanMapper();

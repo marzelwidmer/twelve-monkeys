@@ -36,20 +36,20 @@ public class CustomerResourceAssembler extends ResourceAssemblerSupport<Customer
         // GET products http://localhost:8080/api/customers/1/products; rel="list_products"
         Link listProducts = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())
-                .slash("product_package").toUriComponentsBuilder().build().toUriString(), "list_package");
+                .slash("productPackage").toUriComponentsBuilder().build().toUriString(), "list_package");
         customerResource.add(listProducts);
 
         // POST products http://localhost:8080/api/customers/1/products; rel="create_product"
         Link createProducts = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())
-                .slash("product_package").toUriComponentsBuilder().build().toUriString(), "create_package");
+                .slash("productPackage").toUriComponentsBuilder().build().toUriString(), "create_package");
         customerResource.add(createProducts);
 
 
         // POST products http://localhost:8080/api/customers/1/deeplink; rel="create_deeplink"
         Link deeplink = new Link(linkTo(CustomerController.class)
                 .slash(customer.getId())
-                .slash("deeplink").toUriComponentsBuilder().build().toUriString(), "create_deeplink");
+                .slash("deepLink").toUriComponentsBuilder().build().toUriString(), "create_deeplink");
         customerResource.add(deeplink);
 
         return customerResource;
