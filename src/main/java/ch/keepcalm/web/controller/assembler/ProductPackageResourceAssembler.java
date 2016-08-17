@@ -23,10 +23,13 @@ public class ProductPackageResourceAssembler extends ResourceAssemblerSupport<Pr
         Mapper mapper = new DozerBeanMapper();
         ProductPackageResource productPackageResource = mapper.map(productPackage, ProductPackageResource.class);
 
+        // TODO: 17/08/16 fixMe !! 
         Link self = new Link(linkTo(CustomerController.class)
                 .slash(productPackage.getId())
                 .toUriComponentsBuilder().build().toUriString(), "self");
         productPackageResource.add(self);
+
+        // TODO: 17/08/16 Resouce fuer deepLink (this package und customer)
 
 
         return productPackageResource;
