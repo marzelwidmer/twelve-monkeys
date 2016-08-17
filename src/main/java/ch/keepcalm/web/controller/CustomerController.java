@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 
@@ -78,15 +80,16 @@ public class CustomerController {
     @PostMapping(value = "{id}/productpackage")
     public ProductPackageResource postProductPackage(@RequestBody ProductPackageResource productPackageResource, @PathVariable int id) {
 
+        // FIXME: 17.08.2016 too much product packages Refactore it !
         Mapper mapper = new DozerBeanMapper();
         ProductPackage destObject = mapper.map(productPackageResource, ProductPackage.class);
         ProductPackage result = productPackageService.createProductPackage(destObject);
 
         Customer customer = customerService.getCustomer(id); // TODO: 17/08/16 update customer with product packages
 
-        customer.getProductPackage().add(result);
+        customer.getProductPackages().add(result);
         customerService.updateCustomer(customer);
-
+$
         Link selfLink = new Link(linkTo(CustomerController.class)
                 .slash(id)
                 .slash("productpackage").slash(result.getId()).toUriComponentsBuilder().build().toUriString(), "self");
@@ -105,6 +108,8 @@ public class CustomerController {
     }
     @GetMapping(value = "{id}/productpackage/{productPackageId}")
     public ProductPackageResource getProductPackage(@PathVariable int id,  @PathVariable int productPackageId) {
+        Customer customer = customerService.getCustomer(id);
+
         ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
         ProductPackageResource productPackageResource = productPackageResourceAssembler.toResource(productPackage);
         // TODO: 25/07/16 HATOAS LINKS
@@ -115,6 +120,22 @@ public class CustomerController {
 
     @PatchMapping(value = "{id}/productpackage/{productPackageId}")
     public ProductPackageResource updateProductPackage(@PathVariable int id,  @PathVariable int productPackageId) throws Exception {
+
+        Customer cus = customerService.getCustomer(id);
+        List<ProductPackage> productPackages = cus.getProductPackages();
+        for (ProductPackage productPackage : productPackages) {
+            if (productPackage.getId() == productPackageId){
+                Preis price = productPackagePriceService.getPrice(cus, productPackage);
+                // update price
+                productPackage.setBruttoPreis(price.getBruttoPreis());
+                productPackage.setNettoPreis(price.getNettoPreis());
+                // replace this updates package in list
+                cus.getProductPackages().remove(productPackage.getId());
+                cus.getProductPackages().add(productPackage);
+                break;
+            }
+        }
+
 
         ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
         ProductPackageResource productPackageResource = productPackageResourceAssembler.toResource(productPackage);
@@ -127,10 +148,17 @@ public class CustomerController {
         ProductPackage destObject = mapper.map(productPackageResource, ProductPackage.class);
         destObject.setBruttoPreis(price.getBruttoPreis());
         destObject.setNettoPreis(price.getNettoPreis());
-        customer.getProductPackage().add(destObject);
-        customerService.updateCustomer(customer);
 
-        ProductPackageResource updatedProductPackageResource = productPackageResourceAssembler.toResource(productPackageService.updateProductPackage(destObject));
+
+        // TODO: 17.08.2016 Update Customer object ---
+/*        customer.getProductPackages().add(destObject);
+        Customer customer1 = customerService.updateCustomer(customer); // TODO: 17.08.2016  this make a new record... !!
+        System.out.println(customer1);*/
+        //destObject.setId(productPackageId);
+
+       // ProductPackage updateProductPackage = productPackageService.updateProductPackage(destObject);
+
+        ProductPackageResource updatedProductPackageResource = productPackageResourceAssembler.toResource(productPackage);
 
 
 

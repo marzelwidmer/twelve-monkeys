@@ -1,12 +1,10 @@
 package ch.keepcalm.web.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
@@ -14,7 +12,7 @@ import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by marcelwidmer on 21/03/16.
@@ -53,10 +51,12 @@ public class Product implements Serializable {
 
 
 
+/*
 
 
-    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ProductPackage> productPackages;
+*/
 
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -237,13 +237,13 @@ public class Product implements Serializable {
         this.versicherterBetragCode = versicherterBetragCode;
     }
 
-    public List<ProductPackage> getProductPackages() {
+ /*   public List<ProductPackage> getProductPackages() {
         return productPackages;
     }
 
     public void setProductPackages(List<ProductPackage> productPackages) {
         this.productPackages = productPackages;
-    }
+    }*/
 
     public Date getCreatedOn() {
         return createdOn;
@@ -261,4 +261,39 @@ public class Product implements Serializable {
         this.updatedOn = updatedOn;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return getId() == product.getId() &&
+                Objects.equals(getPrice(), product.getPrice()) &&
+                Objects.equals(getUnfall(), product.getUnfall()) &&
+                Objects.equals(getFranchise(), product.getFranchise()) &&
+                Objects.equals(getDrittesKind(), product.getDrittesKind()) &&
+                Objects.equals(getDescription(), product.getDescription()) &&
+                Objects.equals(getProduktId(), product.getProduktId()) &&
+                Objects.equals(getAvmNetz(), product.getAvmNetz()) &&
+                Objects.equals(getEintrittsalter(), product.getEintrittsalter()) &&
+                Objects.equals(getErgaenzungsmodul(), product.getErgaenzungsmodul()) &&
+                Objects.equals(getInstanz(), product.getInstanz()) &&
+                Objects.equals(getInvaliditaetskapital(), product.getInvaliditaetskapital()) &&
+                Objects.equals(getLeistungsdauer(), product.getLeistungsdauer()) &&
+                Objects.equals(getMutterschaft(), product.getMutterschaft()) &&
+                Objects.equals(getTodesfallkapital(), product.getTodesfallkapital()) &&
+                Objects.equals(getUnfallSistierung(), product.getUnfallSistierung()) &&
+                Objects.equals(getVariante(), product.getVariante()) &&
+                Objects.equals(getVersicherterBetrag(), product.getVersicherterBetrag()) &&
+                Objects.equals(getVersicherterBetragCode(), product.getVersicherterBetragCode()) &&
+               // Objects.equals(getProductPackages(), product.getProductPackages()) &&
+                Objects.equals(getCreatedOn(), product.getCreatedOn()) &&
+                Objects.equals(getUpdatedOn(), product.getUpdatedOn());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getPrice(), getUnfall(), getFranchise(), getDrittesKind(), getDescription(), getProduktId(), getAvmNetz(), getEintrittsalter(), getErgaenzungsmodul(), getInstanz(), getInvaliditaetskapital(), getLeistungsdauer(), getMutterschaft(), getTodesfallkapital(), getUnfallSistierung(), getVariante(), getVersicherterBetrag(), getVersicherterBetragCode(),
+               // getProductPackages(),
+                getCreatedOn(), getUpdatedOn());
+    }
 }

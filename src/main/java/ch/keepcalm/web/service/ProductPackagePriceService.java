@@ -118,7 +118,7 @@ public class ProductPackagePriceService {
         request.withAlleMarken(false);
 
         ProduktListType produktListType = new ProduktListType();
-       // for (ProductPackage productPackage : customer.getProductPackage()) {
+       // for (ProductPackage productPackage : customer.getProductPackages()) {
             for (Product product : productPackage.getProducts()) {
             //List<Product> products = customer.getProducts();
             //for (Product product : products) {
@@ -177,7 +177,7 @@ public class ProductPackagePriceService {
         // TODO: 17.08.2016  customerResource don't habe the products it self, they are new on the productPackages
         // for (Product product : customerResource.getProducts()) {
 
-        //for (ProductPackage productPackage : customer.getProductPackage()) {
+        //for (ProductPackage productPackage : customer.getProductPackages()) {
             for (Product product : productPackage.getProducts()) {
                 produktListType
                     .withProdukt(new ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemierequest.Vertragsbaustein()

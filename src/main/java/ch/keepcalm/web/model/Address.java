@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by marcelwidmer on 10/07/16.
@@ -120,5 +121,25 @@ public class Address  implements Serializable {
 
     public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return getId() == address.getId() &&
+                Objects.equals(getMunicipality(), address.getMunicipality()) &&
+                Objects.equals(getMunicipalityNr(), address.getMunicipalityNr()) &&
+                Objects.equals(getPostalCode(), address.getPostalCode()) &&
+                Objects.equals(getPostalCodeAddition(), address.getPostalCodeAddition()) &&
+                Objects.equals(getLocality(), address.getLocality()) &&
+                Objects.equals(getCreatedOn(), address.getCreatedOn()) &&
+                Objects.equals(getUpdatedOn(), address.getUpdatedOn());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getMunicipality(), getMunicipalityNr(), getPostalCode(), getPostalCodeAddition(), getLocality(), getCreatedOn(), getUpdatedOn());
     }
 }

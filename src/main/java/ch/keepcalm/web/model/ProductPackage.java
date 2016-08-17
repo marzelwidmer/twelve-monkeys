@@ -3,6 +3,7 @@ package ch.keepcalm.web.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by marcelwidmer on 21/03/16.
@@ -49,7 +51,7 @@ public class ProductPackage implements Serializable {
     private BigDecimal ueberrabattierungBetrag;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products;
 
 
@@ -232,5 +234,34 @@ public class ProductPackage implements Serializable {
         this.updatedOn = updatedOn;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductPackage that = (ProductPackage) o;
+        return getId() == that.getId() &&
+                isBestPrice() == that.isBestPrice() &&
+                Objects.equals(getBruttoPreis(), that.getBruttoPreis()) &&
+                Objects.equals(getNettoPreis(), that.getNettoPreis()) &&
+                Objects.equals(getKvg106Betrag(), that.getKvg106Betrag()) &&
+                Objects.equals(getUmweltabgabeBetrag(), that.getUmweltabgabeBetrag()) &&
+                Objects.equals(getDrittesKindPraemie(), that.getDrittesKindPraemie()) &&
+                Objects.equals(getEinjahrgratisBetrag(), that.getEinjahrgratisBetrag()) &&
+                Objects.equals(getFamilienrabattBetrag(), that.getFamilienrabattBetrag()) &&
+                Objects.equals(getKinderJugendrabattBetrag(), that.getKinderJugendrabattBetrag()) &&
+                Objects.equals(getKinderStartrabattBetrag(), that.getKinderStartrabattBetrag()) &&
+                Objects.equals(getKollektivrabatt(), that.getKollektivrabatt()) &&
+                Objects.equals(getKombinationsrabattBetrag(), that.getKombinationsrabattBetrag()) &&
+                Objects.equals(getMehrjahresvertragBetrag(), that.getMehrjahresvertragBetrag()) &&
+                Objects.equals(getPartnerrabattBetrag(), that.getPartnerrabattBetrag()) &&
+                Objects.equals(getUeberrabattierungBetrag(), that.getUeberrabattierungBetrag()) &&
+                Objects.equals(getProducts(), that.getProducts()) &&
+                Objects.equals(getCreatedOn(), that.getCreatedOn()) &&
+                Objects.equals(getUpdatedOn(), that.getUpdatedOn());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), isBestPrice(), getBruttoPreis(), getNettoPreis(), getKvg106Betrag(), getUmweltabgabeBetrag(), getDrittesKindPraemie(), getEinjahrgratisBetrag(), getFamilienrabattBetrag(), getKinderJugendrabattBetrag(), getKinderStartrabattBetrag(), getKollektivrabatt(), getKombinationsrabattBetrag(), getMehrjahresvertragBetrag(), getPartnerrabattBetrag(), getUeberrabattierungBetrag(), getProducts(), getCreatedOn(), getUpdatedOn());
+    }
 }

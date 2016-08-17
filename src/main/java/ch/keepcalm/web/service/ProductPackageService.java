@@ -25,6 +25,8 @@ public class ProductPackageService {
     }
 
     public ProductPackage updateProductPackage(ProductPackage productPackage) {
+ /*       ProductPackage one = repository.getOne(productPackage.getId());
+        productPackage.setId(one.getId());*/
         return repository.save(productPackage);
     }
 }
