@@ -16,16 +16,15 @@ public class ProductPackageService {
         this.repository = repository;
     }
 
-
-
     public ProductPackage createProductPackage(ProductPackage productPackage) {
         return repository.save(productPackage);
     }
-
-
 
     public ProductPackage getProductPackage(int id) {
         return repository.findOne(id);
     }
 
+    public ProductPackage updateProductPackage(ProductPackage productPackage) {
+        return repository.save(productPackage);
+    }
 }

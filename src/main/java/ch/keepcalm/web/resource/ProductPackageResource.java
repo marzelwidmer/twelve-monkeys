@@ -14,6 +14,20 @@ public class ProductPackageResource extends ResourceSupport {
     private BigDecimal bruttoPreis;
     private BigDecimal nettoPreis;
 
+    /*
+    private BigDecimal kvg106Betrag;
+    private BigDecimal umweltabgabeBetrag;
+    private Boolean drittesKindPraemie;
+    private BigDecimal einjahrgratisBetrag;
+    private BigDecimal familienrabattBetrag;
+    private BigDecimal kinderJugendrabattBetrag;
+    private BigDecimal kinderStartrabattBetrag;
+    private BigDecimal kollektivrabatt;
+    private BigDecimal kombinationsrabattBetrag;
+    private BigDecimal mehrjahresvertragBetrag;
+    private BigDecimal partnerrabattBetrag;
+    private BigDecimal ueberrabattierungBetrag;
+*/
     private List<ProductResource> products;
 
 

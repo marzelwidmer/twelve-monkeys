@@ -28,7 +28,7 @@ import java.util.UUID;
 import static ch.keepcalm.web.converter.UiConverter.convertGender;
 
 @Service
-public class ProductPriceService {
+public class ProductPackagePriceService {
 
     private static final String PRO_X = "PRO_x";
     private static final String BASE = "0BAS__HEL_IG";
@@ -74,6 +74,36 @@ public class ProductPriceService {
 
     }
 
+    public ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemieresponse.Preis getPrice(Customer customer, ProductPackage productPackage) throws BerechneBesterPreisBusinessFaultMessage, BerechneBesterPreisSystemFaultMessage, BerechnePraemieSystemFaultMessage, BerechnePraemieBusinessFaultMessage {
+        if (productPackage.isBestPrice()){
+            // call best Price to get the real product ID (with marke/mandant/brand)
+            BerechneBesterPreisResponse response = computeBestPrice(customer, productPackage);
+
+            ch.helsana.services.spezialfunktionen.tarif.v2.berechnebesterpreisresponse.Vertragsbaustein product = response.getProduktList().getProdukt()
+                    .stream()
+                    .filter(p -> p.getProduktId().contains(BASE) || p.getProduktId().contains(BENEFIT)
+                            || p.getProduktId().contains(BENEFIT_PLUS_HAUSARZT) || p.getProduktId().contains(BENEFIT_PLUS_TELEMEDIZIN)
+                            || p.getProduktId().contains(PREMED_24)).findAny().get();
+
+
+             for (Product packageProduct :  productPackage.getProducts()) {
+                if (packageProduct.getProduktId().startsWith(PRO_X)){
+                        packageProduct.setProduktId(packageProduct.getProduktId().replace(PRO_X, "PRO_" + product.getMarke()));
+                }
+            }
+            BerechnePraemieResponse berechnePraemieResponse = computePrice(customer, productPackage);
+            return berechnePraemieResponse.getPreis();
+          /*  Product productResource = productPackage.getProducts()
+                    .stream()
+                    .filter(p -> p.getProduktId().contains(PRO_X))
+                    .findAny().get(); // if no PRO_X
+            productResource.setProduktId(productResource.getProduktId().replace(PRO_X, "PRO_" + product.getMarke()));*/
+        }
+            BerechnePraemieResponse berechnePraemieResponse = computePrice(customer, productPackage);
+            return berechnePraemieResponse.getPreis();
+
+    }
+
 
     /**
      * To get the Brand for BASIS products.
@@ -83,12 +113,12 @@ public class ProductPriceService {
      * @throws BerechneBesterPreisBusinessFaultMessage
      * @throws BerechneBesterPreisSystemFaultMessage
      */
-    private BerechneBesterPreisResponse computeBestPrice(Customer customer) throws BerechneBesterPreisBusinessFaultMessage, BerechneBesterPreisSystemFaultMessage {
+    private BerechneBesterPreisResponse computeBestPrice(Customer customer, ProductPackage productPackage) throws BerechneBesterPreisBusinessFaultMessage, BerechneBesterPreisSystemFaultMessage {
         BerechneBesterPreisRequest request = new BerechneBesterPreisRequest();
         request.withAlleMarken(false);
 
         ProduktListType produktListType = new ProduktListType();
-        for (ProductPackage productPackage : customer.getProductPackage()) {
+       // for (ProductPackage productPackage : customer.getProductPackage()) {
             for (Product product : productPackage.getProducts()) {
             //List<Product> products = customer.getProducts();
             //for (Product product : products) {
@@ -110,7 +140,7 @@ public class ProductPriceService {
                             .withVersicherterBetragCode(StringUtils.isNotEmpty(product.getVersicherterBetragCode()) ? product.getVersicherterBetragCode() : null)
                             .withVariante(StringUtils.isNotEmpty(product.getVariante()) ? product.getVariante() : null));
             }
-        }
+        //}
         request.setCorrelationId(UUID.randomUUID().toString());
         request.withPerson(
                 new Person()
@@ -140,14 +170,14 @@ public class ProductPriceService {
      * @throws BerechnePraemieSystemFaultMessage
      * @throws BerechnePraemieBusinessFaultMessage
      */
-    private BerechnePraemieResponse computePrice(Customer customer) throws BerechnePraemieSystemFaultMessage, BerechnePraemieBusinessFaultMessage {
+    private BerechnePraemieResponse computePrice(Customer customer, ProductPackage productPackage) throws BerechnePraemieSystemFaultMessage, BerechnePraemieBusinessFaultMessage {
         BerechnePraemieRequest request = new BerechnePraemieRequest();
 
         ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemierequest.ProduktListType produktListType = new ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemierequest.ProduktListType();
         // TODO: 17.08.2016  customerResource don't habe the products it self, they are new on the productPackages
         // for (Product product : customerResource.getProducts()) {
 
-        for (ProductPackage productPackage : customer.getProductPackage()) {
+        //for (ProductPackage productPackage : customer.getProductPackage()) {
             for (Product product : productPackage.getProducts()) {
                 produktListType
                     .withProdukt(new ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemierequest.Vertragsbaustein()
@@ -167,7 +197,7 @@ public class ProductPriceService {
                             .withVersicherterBetragCode(StringUtils.isNotEmpty(product.getVersicherterBetragCode()) ? product.getVersicherterBetragCode() : null)
                             .withVariante(StringUtils.isNotEmpty(product.getVariante()) ? product.getVariante() : null));
             }
-        }
+        //}
 
         request.setPersonList(new PersonListType()
                 .withPerson(new ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemierequest.Person()
@@ -185,5 +215,7 @@ public class ProductPriceService {
 
         return priceServiceConsumer.berechnePraemie(request);
     }
+
+
 }
 

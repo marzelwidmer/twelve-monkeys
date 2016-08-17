@@ -1,5 +1,6 @@
 package ch.keepcalm.web.controller;
 
+import ch.helsana.services.spezialfunktionen.tarif.v2.berechnepraemieresponse.Preis;
 import ch.keepcalm.web.controller.assembler.CustomerResourceAssembler;
 import ch.keepcalm.web.controller.assembler.ProductPackageResourceAssembler;
 import ch.keepcalm.web.model.Customer;
@@ -7,6 +8,7 @@ import ch.keepcalm.web.model.ProductPackage;
 import ch.keepcalm.web.resource.CustomerResource;
 import ch.keepcalm.web.resource.ProductPackageResource;
 import ch.keepcalm.web.service.CustomerService;
+import ch.keepcalm.web.service.ProductPackagePriceService;
 import ch.keepcalm.web.service.ProductPackageService;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -34,16 +36,21 @@ public class CustomerController {
     private CustomerResourceAssembler customerResourceAssembler;
     private ProductPackageResourceAssembler productPackageResourceAssembler;
 
+    private ProductPackagePriceService productPackagePriceService;
+
 
     @Autowired
     public void setCustomerController(CustomerService customerService, CustomerResourceAssembler customerResourceAssembler,
                                       ProductPackageService productPackageService,
-                                      ProductPackageResourceAssembler productPackageResourceAssembler) {
+                                      ProductPackageResourceAssembler productPackageResourceAssembler,
+                                      ProductPackagePriceService productPackagePriceService) {
         this.customerService = customerService;
         this.customerResourceAssembler = customerResourceAssembler;
 
         this.productPackageService = productPackageService;
         this.productPackageResourceAssembler = productPackageResourceAssembler;
+
+        this.productPackagePriceService = productPackagePriceService;
     }
 
 
@@ -100,45 +107,58 @@ public class CustomerController {
     public ProductPackageResource getProductPackage(@PathVariable int id,  @PathVariable int productPackageId) {
         ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
         ProductPackageResource productPackageResource = productPackageResourceAssembler.toResource(productPackage);
-
         // TODO: 25/07/16 HATOAS LINKS
-        Link selfLink = new Link(linkTo(CustomerController.class)
-                .slash(id)
-                .slash("productpackage").slash(productPackageId).toUriComponentsBuilder().build().toUriString(), "self");
-        productPackageResource.add(selfLink);
-
-
-        Link getSummary = new Link(linkTo(CustomerController.class)
-                .slash(id)
-                .slash("productpackage").slash(productPackageId).toUriComponentsBuilder().build().toUriString(), "getSummary");
-        productPackageResource.add(getSummary);
-
-
-
+        updateProductPackageResourceLinks(id, productPackageId, productPackageResource);
         return productPackageResource;
     }
 
 
     @PatchMapping(value = "{id}/productpackage/{productPackageId}")
-    public ProductPackageResource updateProductPackage(@PathVariable int id,  @PathVariable int productPackageId) {
+    public ProductPackageResource updateProductPackage(@PathVariable int id,  @PathVariable int productPackageId) throws Exception {
+
         ProductPackage productPackage = productPackageService.getProductPackage(productPackageId);
         ProductPackageResource productPackageResource = productPackageResourceAssembler.toResource(productPackage);
+        Customer customer = customerService.getCustomer(id);
+        // call soap
+        Preis price = productPackagePriceService.getPrice(customer, productPackage);
 
+        // update
+        Mapper mapper = new DozerBeanMapper();
+        ProductPackage destObject = mapper.map(productPackageResource, ProductPackage.class);
+        destObject.setBruttoPreis(price.getBruttoPreis());
+        destObject.setNettoPreis(price.getNettoPreis());
+        customer.getProductPackage().add(destObject);
+        customerService.updateCustomer(customer);
+
+        ProductPackageResource updatedProductPackageResource = productPackageResourceAssembler.toResource(productPackageService.updateProductPackage(destObject));
+
+
+
+
+        // TODO: 25/07/16 HATOAS LINKS
+        updateProductPackageResourceLinks(id, productPackageId, updatedProductPackageResource);
+
+        return updatedProductPackageResource;
+    }
+
+
+    /**
+     *
+     * @param id
+     * @param productPackageId
+     * @param productPackageResource
+     */
+    private void updateProductPackageResourceLinks(@PathVariable int id, @PathVariable int productPackageId, ProductPackageResource productPackageResource) {
         // TODO: 25/07/16 HATOAS LINKS
         Link selfLink = new Link(linkTo(CustomerController.class)
                 .slash(id)
                 .slash("productpackage").slash(productPackageId).toUriComponentsBuilder().build().toUriString(), "self");
         productPackageResource.add(selfLink);
 
-
         Link getSummary = new Link(linkTo(CustomerController.class)
                 .slash(id)
                 .slash("productpackage").slash(productPackageId).toUriComponentsBuilder().build().toUriString(), "getSummary");
         productPackageResource.add(getSummary);
-
-
-
-        return productPackageResource;
     }
 
 
